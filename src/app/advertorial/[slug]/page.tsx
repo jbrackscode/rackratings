@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { AdvertorialBadge } from "@/components/advertorial/advertorial-badge"
 import { advertorials } from "@/lib/data"
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo"
+import { goUrl } from "@/lib/affiliate"
 import type { Metadata } from "next"
 
 interface Props {
@@ -87,7 +88,7 @@ export default async function AdvertorialPage({ params }: Props) {
             <p className="text-sm text-gray-600 mt-0.5">Click below to see the exclusive offer</p>
           </div>
           <Button variant="cta" size="lg" asChild className="flex-shrink-0">
-            <a href={ad.ctaUrl} target="_blank" rel="nofollow sponsored noopener noreferrer">
+            <a href={goUrl(ad.ctaUrl, { source: "advertorial-top" })} target="_blank" rel="noopener noreferrer">
               {ad.ctaText} <ExternalLink className="ml-2 h-4 w-4" />
             </a>
           </Button>
@@ -117,7 +118,7 @@ export default async function AdvertorialPage({ params }: Props) {
             size="xl"
             className="bg-white text-orange-600 hover:bg-orange-50 font-bold"
           >
-            <a href={ad.ctaUrl} target="_blank" rel="nofollow sponsored noopener noreferrer">
+            <a href={goUrl(ad.ctaUrl, { source: "advertorial-bottom" })} target="_blank" rel="noopener noreferrer">
               Visit {ad.brand} <ExternalLink className="ml-2 h-5 w-5" />
             </a>
           </Button>

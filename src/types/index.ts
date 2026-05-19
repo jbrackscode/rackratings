@@ -66,6 +66,15 @@ export interface Advertorial {
   disclosure: string
 }
 
+export interface Brand {
+  slug: string
+  name: string
+  description: string
+  country: string
+  website: string
+  categories: string[]
+}
+
 export interface BlogPost {
   slug: string
   title: string

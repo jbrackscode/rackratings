@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { RatingCard } from "@/components/ratings/rating-card"
 import { AdvertorialCard } from "@/components/advertorial/advertorial-card"
+import { PageMasthead } from "@/components/layout/page-masthead"
 import { categories, getProductsByCategory, getCategoryBySlug, advertorials } from "@/lib/data"
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo"
 import type { Metadata } from "next"
@@ -49,28 +50,27 @@ export default async function CategoryPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero */}
-      <div className="bg-gradient-to-b from-blue-50 to-white border-b border-gray-100">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <nav className="text-sm text-gray-500 mb-4">
-            <Link href="/" className="hover:text-gray-700">Home</Link>
-            <span className="mx-2">/</span>
-            <Link href="/categories" className="hover:text-gray-700">Categories</Link>
-            <span className="mx-2">/</span>
-            <span className="text-gray-900">{cat.name}</span>
-          </nav>
-          <div className="flex items-center gap-4">
-            <span className="text-5xl">{cat.icon}</span>
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                Best {cat.name} in Australia {new Date().getFullYear()}
-              </h1>
-              <p className="text-gray-500 mt-1">{cat.description}</p>
-              <p className="text-sm text-gray-400 mt-1">{products.length} products rated</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PageMasthead
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Categories", href: "/categories" },
+          { label: cat.name },
+        ]}
+        icon={cat.icon}
+        heading={`Best ${cat.name} in Australia ${new Date().getFullYear()}`}
+        description={cat.description}
+        updatedAt={products[0]?.updatedAt}
+        productCount={products.length}
+        topProduct={
+          products[0]
+            ? {
+                name: products[0].name,
+                rating: products[0].rating,
+                href: `/products/${products[0].categorySlug}/${products[0].slug}`,
+              }
+            : undefined
+        }
+      />
 
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-8">

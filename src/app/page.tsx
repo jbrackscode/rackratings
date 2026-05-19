@@ -1,6 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, Star, ShieldCheck, Zap, Users } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ArrowRight, ShieldCheck, Zap, Users, ChevronRight } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { RatingCard } from "@/components/ratings/rating-card"
 import { AdvertorialCard } from "@/components/advertorial/advertorial-card"
@@ -20,44 +19,70 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative bg-gradient-to-b from-blue-50 to-white border-b border-gray-100">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-1.5 mb-6">
-            <Star className="h-4 w-4 text-amber-400" fill="currentColor" />
-            <span className="text-sm font-semibold text-blue-800">Trusted by 250,000+ Australians</span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 leading-tight">
-            Australia&apos;s #1
-            <span className="text-blue-600"> Rack Ratings </span>
-            &amp; Comparison Site
-          </h1>
-          <p className="mt-6 text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Expert reviews and side-by-side comparisons of car racks, bike racks, and outdoor racks – all rated for Australian conditions and priced in AUD.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3 justify-center">
-            <Button size="xl" asChild>
-              <Link href="/categories">
-                Browse All Categories <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button size="xl" variant="outline" asChild>
-              <Link href="/compare">Compare Products</Link>
-            </Button>
-          </div>
+      {/* ── Homepage masthead (InfoChoice-style image hero) ── */}
+      <section className="relative bg-[#0d2340] overflow-hidden">
+        {/* Diagonal accent shape */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0d2340] via-[#112d52] to-[#0a3a6b] opacity-100" />
+        <div className="absolute bottom-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-600/20 to-transparent pointer-events-none" />
 
-          <div className="mt-12 grid grid-cols-3 gap-4 max-w-lg mx-auto text-center">
-            <div>
-              <div className="text-2xl font-bold text-gray-900">500+</div>
-              <div className="text-xs text-gray-500 mt-0.5">Products Rated</div>
+        <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            {/* Eyebrow */}
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-4 py-1.5 mb-6">
+              <span className="h-2 w-2 rounded-full bg-emerald-400" />
+              <span className="text-sm font-medium text-white/90">Trusted by 250,000+ Australians</span>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-gray-900">50k+</div>
-              <div className="text-xs text-gray-500 mt-0.5">User Reviews</div>
+
+            <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight tracking-tight">
+              Helping Australians<br />
+              <span className="text-blue-300">find better rack deals</span>
+            </h1>
+
+            <p className="mt-5 text-lg text-white/70 leading-relaxed max-w-xl">
+              We compare hundreds of car racks, bike racks, and outdoor racks — expert-rated for Australian conditions and priced in AUD.
+            </p>
+
+            {/* Category quick-links */}
+            <div className="mt-8 flex flex-wrap gap-2">
+              {categories.slice(0, 6).map((cat) => (
+                <Link
+                  key={cat.slug}
+                  href={`/categories/${cat.slug}`}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 px-4 py-2 text-sm font-medium text-white transition-all"
+                >
+                  <span>{cat.icon}</span>
+                  <span>{cat.name}</span>
+                  <ChevronRight className="h-3.5 w-3.5 opacity-60" />
+                </Link>
+              ))}
+              <Link
+                href="/categories"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 px-4 py-2 text-sm font-medium text-white/70 hover:text-white transition-all"
+              >
+                All categories <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-gray-900">8</div>
-              <div className="text-xs text-gray-500 mt-0.5">Categories</div>
+          </div>
+        </div>
+
+        {/* Trust / stats bar */}
+        <div className="relative border-t border-white/10 bg-white/5">
+          <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+            <div className="flex flex-wrap items-center gap-x-10 gap-y-2">
+              <div className="flex items-center gap-2 text-sm text-white/60">
+                <ShieldCheck className="h-4 w-4 text-emerald-400 flex-shrink-0" />
+                <span>Independent ratings</span>
+              </div>
+              <div className="h-4 w-px bg-white/20 hidden sm:block" />
+              <div className="text-sm text-white/60"><span className="font-semibold text-white">500+</span> products rated</div>
+              <div className="h-4 w-px bg-white/20 hidden sm:block" />
+              <div className="text-sm text-white/60"><span className="font-semibold text-white">9</span> rack categories</div>
+              <div className="h-4 w-px bg-white/20 hidden sm:block" />
+              <div className="text-sm text-white/60"><span className="font-semibold text-white">AUD</span> prices only</div>
+              <div className="h-4 w-px bg-white/20 hidden sm:block" />
+              <Link href="/compare" className="ml-auto text-sm font-semibold text-blue-300 hover:text-blue-200 flex items-center gap-1 transition-colors">
+                Compare products <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
             </div>
           </div>
         </div>

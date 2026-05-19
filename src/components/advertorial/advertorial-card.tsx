@@ -3,6 +3,7 @@ import { ExternalLink } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { goUrl } from "@/lib/affiliate"
 import type { Advertorial } from "@/types"
 
 interface AdvertorialCardProps {
@@ -26,9 +27,9 @@ export function AdvertorialCard({ advertorial }: AdvertorialCardProps) {
         <p className="text-sm text-gray-600 line-clamp-3 mb-4">{advertorial.excerpt}</p>
         <Button variant="cta" size="sm" asChild className="w-full">
           <a
-            href={advertorial.ctaUrl}
+            href={goUrl(advertorial.ctaUrl, { source: "advertorial-card" })}
             target="_blank"
-            rel="nofollow sponsored noopener noreferrer"
+            rel="noopener noreferrer"
           >
             {advertorial.ctaText} <ExternalLink className="ml-1 h-3.5 w-3.5" />
           </a>

@@ -45,7 +45,6 @@ export default function ComparePage() {
       {/* Featured comparison */}
       <div className="mb-12">
         <h2 className="text-xl font-bold text-gray-900 mb-2">Featured Comparison</h2>
-        <p className="text-gray-500 mb-6">Sony WH-1000XM6 vs Bose QuietComfort 45 – Which is the best noise-cancelling headphone for Australians?</p>
         <ComparisonTable products={sampleProducts} />
       </div>
 
@@ -53,12 +52,7 @@ export default function ComparePage() {
       <div>
         <h2 className="text-xl font-bold text-gray-900 mb-6">Popular Comparisons</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {[
-            { title: "MacBook Air M3 vs Dell XPS 15", href: "/compare/laptops/macbook-air-m3-vs-dell-xps-15-2025" },
-            { title: "iPhone 16 Pro vs Samsung Galaxy S25 Ultra", href: "/compare/smartphones/iphone-16-pro-vs-samsung-galaxy-s25-ultra" },
-            { title: "LG OLED C4 vs Samsung QLED Q80D", href: "/compare/tvs/lg-oled-c4-65-vs-samsung-98-neo-qled-8k" },
-            { title: "Sony XM6 vs Bose QC45", href: "/compare/headphones/sony-wh-1000xm6-vs-bose-quietcomfort-45" },
-          ].map((item) => (
+          {([] as { title: string; href: string }[]).map((item) => (
             <Link
               key={item.href}
               href={item.href}

@@ -22,9 +22,9 @@ export function Footer() {
             <p className="mt-3 text-sm text-gray-500 leading-relaxed">
               Australia&apos;s trusted source for car rack, bike rack, and outdoor rack ratings, expert reviews, and comparisons.
             </p>
-            <p className="mt-4 text-xs text-gray-400">
+            {/* <p className="mt-4 text-xs text-gray-400">
               ABN: 00 000 000 000
-            </p>
+            </p> */}
           </div>
 
           {/* Categories */}
@@ -83,7 +83,7 @@ export function Footer() {
           <div>
             <h3 className="text-sm font-semibold text-gray-900">Company</h3>
             <ul className="mt-3 space-y-2">
-              <li>
+              {/* <li>
                 <Link href="/about" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
                   About Us
                 </Link>
@@ -107,7 +107,7 @@ export function Footer() {
                 <Link href="/terms" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
                   Terms of Use
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/affiliate-disclosure" className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
                   Affiliate Disclosure
@@ -119,7 +119,8 @@ export function Footer() {
 
         <div className="mt-10 border-t border-gray-200 pt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-gray-400">
-            © {year} RackRatings Pty Ltd. All rights reserved. ABN: 00 000 000 000
+            © {year} RackRatings. All rights reserved. 
+            {/* ABN: 00 000 000 000 */}
           </p>
           <p className="text-xs text-gray-400 max-w-lg">
             <strong>Affiliate Disclosure:</strong> RackRatings earns a commission from qualifying purchases made through affiliate links on this site at no extra cost to you. Advertorial content is clearly labelled. Our editorial ratings are independent and unbiased.

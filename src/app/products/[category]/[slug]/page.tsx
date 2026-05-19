@@ -10,6 +10,7 @@ import { AdvertorialCard } from "@/components/advertorial/advertorial-card"
 import { products, getProductBySlug, getProductsByCategory, getReviewsByProduct, advertorials } from "@/lib/data"
 import { buildMetadata, productJsonLd, breadcrumbJsonLd } from "@/lib/seo"
 import { formatReviewCount } from "@/lib/utils"
+import { goUrl } from "@/lib/affiliate"
 import type { Metadata } from "next"
 
 interface Props {
@@ -83,7 +84,7 @@ export default async function ProductPage({ params }: Props) {
             <div className="flex flex-wrap items-center gap-4 mt-4">
               <div className="flex items-center gap-2">
                 <StarRating rating={product.rating} size="lg" showValue />
-                <span className="text-gray-500 text-sm">({formatReviewCount(product.reviewCount)} reviews)</span>
+                {/* <span className="text-gray-500 text-sm">({formatReviewCount(product.reviewCount)} reviews)</span> */}
               </div>
               <div className="flex items-center gap-1.5 text-xs text-gray-400">
                 <Calendar className="h-3.5 w-3.5" />
@@ -108,7 +109,7 @@ export default async function ProductPage({ params }: Props) {
               </div>
               {product.affiliateUrl && (
                 <Button variant="cta" size="lg" asChild>
-                  <a href={product.affiliateUrl} target="_blank" rel="nofollow sponsored noopener noreferrer">
+                  <a href={goUrl(product.affiliateUrl, { product: product.slug, category: product.categorySlug, source: "product-page" })} target="_blank" rel="noopener noreferrer">
                     Check Best Price <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
@@ -223,10 +224,10 @@ export default async function ProductPage({ params }: Props) {
                     <div className="text-xs text-gray-400 mt-0.5">out of 5.0</div>
                   </div>
                 </div>
-                <div className="text-xs text-gray-500">{formatReviewCount(product.reviewCount)} user reviews</div>
+                {/* <div className="text-xs text-gray-500">{formatReviewCount(product.reviewCount)} user reviews</div> */}
                 {product.affiliateUrl && (
                   <Button variant="cta" size="default" asChild className="w-full mt-4">
-                    <a href={product.affiliateUrl} target="_blank" rel="nofollow sponsored noopener noreferrer">
+                    <a href={goUrl(product.affiliateUrl, { product: product.slug, category: product.categorySlug, source: "product-sidebar" })} target="_blank" rel="noopener noreferrer">
                       Best Price <ExternalLink className="ml-1 h-4 w-4" />
                     </a>
                   </Button>

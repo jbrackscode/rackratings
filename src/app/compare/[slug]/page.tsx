@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ComparisonTable } from "@/components/ratings/comparison-table"
 import { RatingCard } from "@/components/ratings/rating-card"
+import { PageMasthead } from "@/components/layout/page-masthead"
 import { products, getCategoryBySlug, categories } from "@/lib/data"
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo"
 import type { Metadata } from "next"
@@ -43,21 +44,29 @@ export default async function CompareByCategory({ params }: Props) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
 
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <nav className="text-sm text-gray-500 mb-6">
-          <Link href="/" className="hover:text-gray-700">Home</Link>
-          <span className="mx-2">/</span>
-          <Link href="/compare" className="hover:text-gray-700">Compare</Link>
-          <span className="mx-2">/</span>
-          <span className="text-gray-900">{cat.name}</span>
-        </nav>
+      <PageMasthead
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Compare", href: "/compare" },
+          { label: cat.name },
+        ]}
+        icon={cat.icon}
+        heading={`Compare ${cat.name} in Australia ${new Date().getFullYear()}`}
+        description={`Side-by-side specs, ratings, and prices for the best ${cat.name.toLowerCase()} available in Australia.`}
+        updatedAt={categoryProducts[0]?.updatedAt}
+        productCount={categoryProducts.length}
+        topProduct={
+          categoryProducts[0]
+            ? {
+                name: categoryProducts[0].name,
+                rating: categoryProducts[0].rating,
+                href: `/products/${categoryProducts[0].categorySlug}/${categoryProducts[0].slug}`,
+              }
+            : undefined
+        }
+      />
 
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Compare {cat.name} in Australia {new Date().getFullYear()}
-        </h1>
-        <p className="text-gray-500 mb-8">
-          Side-by-side specs, ratings, and prices for the best {cat.name.toLowerCase()} available in Australia.
-        </p>
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
 
         {categoryProducts.length >= 2 ? (
           <>

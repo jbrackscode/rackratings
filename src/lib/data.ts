@@ -1,4 +1,4 @@
-import type { Category, Product, Advertorial, BlogPost, Review } from "@/types"
+import type { Category, Product, Advertorial, BlogPost, Review, Brand } from "@/types"
 
 export const categories: Category[] = [
   {
@@ -982,6 +982,80 @@ export const reviews: Review[] = [
     verified: true,
     date: "2025-02-28",
   },
+  // ─── Real reviews sourced from jbracks.com.au/products/4-e-bike-rack ─────
+  {
+    id: "jb-site-1",
+    productSlug: "jb-racks-4-vertical-bike-rack",
+    author: "Roger L.",
+    rating: 5,
+    title: "Very surprised at the quality",
+    body: "Very surprised at the quality for the price and looks great. I was a little unsure about JB Racks but now happy I went with it.",
+    verified: true,
+    date: "2025-03-01",
+  },
+  {
+    id: "jb-site-2",
+    productSlug: "jb-racks-4-vertical-bike-rack",
+    author: "Helen M.",
+    rating: 5,
+    title: "Highly recommend",
+    body: "Highly recommend it! Very good for the money, our e-bikes much easier to transport now.",
+    verified: true,
+    date: "2025-02-15",
+  },
+  {
+    id: "jb-site-3",
+    productSlug: "jb-racks-4-vertical-bike-rack",
+    author: "Dale W.",
+    rating: 5,
+    title: "Great rack – great value",
+    body: "Great rack! Just took it out for the first time fully loaded, and it handled everything with ease. Shipping could've been faster, but overall it's a great value.",
+    verified: true,
+    date: "2025-01-28",
+  },
+]
+
+export const brands: Brand[] = [
+  {
+    slug: "jb-racks",
+    name: "JB Racks",
+    description: "South Australian company founded by Jameson Broadbent, making Australia's most popular hitch-mounted vertical bike racks. Trusted by over 15,000 Australian families with a 4-year warranty and free shipping nationwide.",
+    country: "Australia",
+    website: "https://jbracks.com.au",
+    categories: ["Vertical Bike Racks", "Hitch Bike Racks"],
+  },
+  {
+    slug: "thule",
+    name: "Thule",
+    description: "Swedish premium rack brand with the widest product range in Australia. Known for precision engineering, low wind noise, and a broad ecosystem of compatible accessories across roof racks, bike carriers, and cargo boxes.",
+    country: "Sweden",
+    website: "https://www.thule.com/en-au",
+    categories: ["Roof Racks", "Hitch Bike Racks", "Roof Bike Carriers", "Roof Cargo Boxes", "Ski & Snowboard Carriers"],
+  },
+  {
+    slug: "rhino-rack",
+    name: "Rhino-Rack",
+    description: "Hunter Valley, NSW brand designing rugged roof rack systems for Australian 4WDs and SUVs. Best known for the Pioneer platform system and a lifetime structural warranty. Proudly Australian designed and engineered.",
+    country: "Australia",
+    website: "https://www.rhinorack.com.au",
+    categories: ["Roof Racks", "Ute & Van Racks"],
+  },
+  {
+    slug: "yakima",
+    name: "Yakima",
+    description: "American rack brand with a strong following in Australia for premium hitch and kayak carriers. Known for aluminium builds, anti-sway cradles, and clean integration with most roof rack systems.",
+    country: "USA",
+    website: "https://www.yakima.com.au",
+    categories: ["Hitch Bike Racks", "Kayak & Canoe Carriers"],
+  },
+  {
+    slug: "steadyrack",
+    name: "Steadyrack",
+    description: "Australian invention that became the world's most popular wall-mounted bike storage system. The Classic Rack's 180° swivel arm lets you store bikes in the tightest garage without frame contact.",
+    country: "Australia",
+    website: "https://www.steadyrack.com",
+    categories: ["Bike Storage Racks"],
+  },
 ]
 
 export function getProductsByCategory(categorySlug: string): Product[] {
@@ -1010,4 +1084,19 @@ export function getFeaturedProducts(): Product[] {
 
 export function getTopRatedProducts(limit = 6): Product[] {
   return [...products].sort((a, b) => b.rating - a.rating).slice(0, limit)
+}
+
+export function getBrandBySlug(slug: string): Brand | undefined {
+  return brands.find((b) => b.slug === slug)
+}
+
+export function getProductsByBrand(brandName: string): Product[] {
+  return products.filter((p) => p.brand === brandName)
+}
+
+export function getReviewsByBrand(brandName: string): Review[] {
+  const brandProductSlugs = new Set(
+    products.filter((p) => p.brand === brandName).map((p) => p.slug)
+  )
+  return reviews.filter((r) => brandProductSlugs.has(r.productSlug))
 }

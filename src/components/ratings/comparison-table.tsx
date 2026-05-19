@@ -3,6 +3,7 @@ import { ExternalLink, Check, X } from "lucide-react"
 import { StarRating } from "@/components/ui/star-rating"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { goUrl } from "@/lib/affiliate"
 import type { Product } from "@/types"
 
 interface ComparisonTableProps {
@@ -48,7 +49,7 @@ export function ComparisonTable({ products }: ComparisonTableProps) {
               <td key={product.slug} className="p-4 text-center">
                 <div className="flex flex-col items-center gap-1">
                   <StarRating rating={product.rating} size="sm" showValue />
-                  <span className="text-xs text-gray-400">{product.reviewCount} reviews</span>
+                  {/* <span className="text-xs text-gray-400">{product.reviewCount} reviews</span> */}
                 </div>
               </td>
             ))}
@@ -94,9 +95,9 @@ export function ComparisonTable({ products }: ComparisonTableProps) {
                 {product.affiliateUrl ? (
                   <Button variant="cta" size="sm" asChild>
                     <a
-                      href={product.affiliateUrl}
+                      href={goUrl(product.affiliateUrl, { product: product.slug, category: product.categorySlug, source: "comparison-table" })}
                       target="_blank"
-                      rel="nofollow sponsored noopener noreferrer"
+                      rel="noopener noreferrer"
                     >
                       Best Price <ExternalLink className="ml-1 h-3 w-3" />
                     </a>

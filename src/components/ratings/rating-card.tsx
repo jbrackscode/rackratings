@@ -4,7 +4,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { StarRating } from "@/components/ui/star-rating"
-import { formatReviewCount } from "@/lib/utils"
+// import { formatReviewCount } from "@/lib/utils"
+import { goUrl } from "@/lib/affiliate"
 import type { Product } from "@/types"
 
 interface RatingCardProps {
@@ -38,13 +39,13 @@ export function RatingCard({ product, rank, variant = "default" }: RatingCardPro
               <p className="text-xs text-gray-500 mt-0.5">{product.brand}</p>
               <div className="flex items-center gap-2 mt-1.5">
                 <StarRating rating={product.rating} size="sm" showValue />
-                <span className="text-xs text-gray-400">({formatReviewCount(product.reviewCount)})</span>
+                {/* <span className="text-xs text-gray-400">({formatReviewCount(product.reviewCount)})</span> */}
               </div>
               <div className="flex items-center justify-between mt-2">
                 <span className="font-bold text-gray-900 text-sm">{product.priceFormatted}</span>
                 {product.affiliateUrl && (
                   <Button variant="outline" size="sm" asChild className="h-7 text-xs px-2">
-                    <a href={product.affiliateUrl} target="_blank" rel="nofollow sponsored noopener noreferrer">
+                    <a href={goUrl(product.affiliateUrl, { product: product.slug, category: product.categorySlug, source: "rating-card-compact" })} target="_blank" rel="noopener noreferrer">
                       Buy <ExternalLink className="ml-1 h-3 w-3" />
                     </a>
                   </Button>
@@ -96,7 +97,7 @@ export function RatingCard({ product, rank, variant = "default" }: RatingCardPro
 
             <div className="flex flex-wrap items-center gap-3 mt-2">
               <StarRating rating={product.rating} size="md" showValue />
-              <span className="text-sm text-gray-400">{formatReviewCount(product.reviewCount)} reviews</span>
+              {/* <span className="text-sm text-gray-400">{formatReviewCount(product.reviewCount)} reviews</span> */}
             </div>
 
             <p className="mt-2 text-sm text-gray-600 line-clamp-2">{product.description}</p>
@@ -128,9 +129,9 @@ export function RatingCard({ product, rank, variant = "default" }: RatingCardPro
               {product.affiliateUrl && (
                 <Button variant="cta" size="default" asChild className="w-full sm:w-auto">
                   <a
-                    href={product.affiliateUrl}
+                    href={goUrl(product.affiliateUrl, { product: product.slug, category: product.categorySlug, source: "rating-card" })}
                     target="_blank"
-                    rel="nofollow sponsored noopener noreferrer"
+                    rel="noopener noreferrer"
                   >
                     Best Price <ExternalLink className="ml-1 h-4 w-4" />
                   </a>
