@@ -40,8 +40,8 @@ export function Header() {
             <Image
               src="/logo.svg"
               alt="RackRatings"
-              width={160}
-              height={20}
+              width={210}
+              height={30}
               priority
             />
             <span aria-hidden="true" className="w-px h-7 bg-gray-200" />
