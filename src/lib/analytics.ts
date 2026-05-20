@@ -1,8 +1,4 @@
-declare global {
-  interface Window {
-    dataLayer: Record<string, unknown>[]
-  }
-}
+type DataLayer = Record<string, unknown>[]
 
 export interface SelectItemParams {
   product: {
@@ -44,12 +40,12 @@ export function pushSelectItem({
 }: SelectItemParams): void {
   if (typeof window === "undefined") return
 
-  window.dataLayer = window.dataLayer || []
+  const dl = ((window as unknown as { dataLayer: DataLayer }).dataLayer ??= [])
 
   // GA4 / GTM spec: clear previous ecommerce payload before pushing a new one
-  window.dataLayer.push({ ecommerce: null })
+  dl.push({ ecommerce: null })
 
-  window.dataLayer.push({
+  dl.push({
     event: "select_item",
     ecommerce: {
       item_list_id: listId ?? product.categorySlug,
