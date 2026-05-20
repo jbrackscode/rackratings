@@ -3,8 +3,8 @@ import Link from "next/link"
 import { ExternalLink, CheckCircle, Globe, Star } from "lucide-react"
 import { StarRating } from "@/components/ui/star-rating"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { PageMasthead } from "@/components/layout/page-masthead"
+import { TrackedCta } from "@/components/tracking/tracked-cta"
 import { brands, getBrandBySlug, getProductsByBrand, getReviewsByBrand } from "@/lib/data"
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo"
 import { goUrl } from "@/lib/affiliate"
@@ -184,15 +184,13 @@ export default async function BrandPage({ params }: Props) {
                     Visit {brand.name} <ExternalLink className="h-3.5 w-3.5" />
                   </a>
                   {topProduct?.affiliateUrl && (
-                    <Button variant="cta" size="sm" asChild>
-                      <a
-                        href={goUrl(topProduct.affiliateUrl, { product: topProduct.slug, category: topProduct.categorySlug, source: "brand-page" })}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Best Price <ExternalLink className="ml-1 h-3.5 w-3.5" />
-                      </a>
-                    </Button>
+                    <TrackedCta
+                      href={goUrl(topProduct.affiliateUrl, { product: topProduct.slug, category: topProduct.categorySlug, source: "brand-page" })}
+                      label="Go to site"
+                      product={topProduct}
+                      placement="brand-page"
+                      size="sm"
+                    />
                   )}
                 </div>
               </div>
@@ -299,15 +297,15 @@ export default async function BrandPage({ params }: Props) {
                       )}
                     </div>
                     {product.affiliateUrl && (
-                      <Button variant="outline" size="sm" asChild className="flex-shrink-0 h-8 text-xs px-3">
-                        <a
-                          href={goUrl(product.affiliateUrl, { product: product.slug, category: product.categorySlug, source: "brand-products" })}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Buy <ExternalLink className="ml-1 h-3 w-3" />
-                        </a>
-                      </Button>
+                      <TrackedCta
+                        href={goUrl(product.affiliateUrl, { product: product.slug, category: product.categorySlug, source: "brand-products" })}
+                        label="Go to site"
+                        product={product}
+                        placement="brand-products"
+                        variant="outline"
+                        size="sm"
+                        className="flex-shrink-0 h-8 text-xs px-3"
+                      />
                     )}
                   </div>
                 ))}
@@ -363,15 +361,14 @@ export default async function BrandPage({ params }: Props) {
                   </Link>
                   <div className="text-lg font-bold text-gray-900 mb-3">{topProduct.priceFormatted}</div>
                   {topProduct.affiliateUrl && (
-                    <Button variant="cta" size="sm" asChild className="w-full">
-                      <a
-                        href={goUrl(topProduct.affiliateUrl, { product: topProduct.slug, category: topProduct.categorySlug, source: "brand-sidebar" })}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Best Price <ExternalLink className="ml-1 h-3.5 w-3.5" />
-                      </a>
-                    </Button>
+                    <TrackedCta
+                      href={goUrl(topProduct.affiliateUrl, { product: topProduct.slug, category: topProduct.categorySlug, source: "brand-sidebar" })}
+                      label="Go to site"
+                      product={topProduct}
+                      placement="brand-sidebar"
+                      size="sm"
+                      className="w-full"
+                    />
                   )}
                 </div>
               )}

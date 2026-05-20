@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
-import { ExternalLink, CheckCircle, XCircle, Calendar, RefreshCw } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { CheckCircle, XCircle, Calendar, RefreshCw } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { StarRating } from "@/components/ui/star-rating"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -11,6 +10,7 @@ import { products, getProductBySlug, getProductsByCategory, getReviewsByProduct,
 import { buildMetadata, productJsonLd, breadcrumbJsonLd } from "@/lib/seo"
 import { formatReviewCount } from "@/lib/utils"
 import { goUrl } from "@/lib/affiliate"
+import { TrackedCta } from "@/components/tracking/tracked-cta"
 import type { Metadata } from "next"
 
 interface Props {
@@ -108,11 +108,13 @@ export default async function ProductPage({ params }: Props) {
                 <div className="text-xs text-gray-400 mt-0.5">Approximate price in AUD</div>
               </div>
               {product.affiliateUrl && (
-                <Button variant="cta" size="lg" asChild>
-                  <a href={goUrl(product.affiliateUrl, { product: product.slug, category: product.categorySlug, source: "product-page" })} target="_blank" rel="noopener noreferrer">
-                    Check Best Price <ExternalLink className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
+                <TrackedCta
+                  href={goUrl(product.affiliateUrl, { product: product.slug, category: product.categorySlug, source: "product-page" })}
+                  label="Go to site"
+                  product={product}
+                  placement="product-page"
+                  size="lg"
+                />
               )}
             </div>
 
@@ -226,11 +228,13 @@ export default async function ProductPage({ params }: Props) {
                 </div>
                 {/* <div className="text-xs text-gray-500">{formatReviewCount(product.reviewCount)} user reviews</div> */}
                 {product.affiliateUrl && (
-                  <Button variant="cta" size="default" asChild className="w-full mt-4">
-                    <a href={goUrl(product.affiliateUrl, { product: product.slug, category: product.categorySlug, source: "product-sidebar" })} target="_blank" rel="noopener noreferrer">
-                      Best Price <ExternalLink className="ml-1 h-4 w-4" />
-                    </a>
-                  </Button>
+                  <TrackedCta
+                    href={goUrl(product.affiliateUrl, { product: product.slug, category: product.categorySlug, source: "product-sidebar" })}
+                    label="Go to site"
+                    product={product}
+                    placement="product-sidebar"
+                    className="w-full mt-4"
+                  />
                 )}
               </div>
 

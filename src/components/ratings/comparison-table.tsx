@@ -1,9 +1,12 @@
+"use client"
+
 import Link from "next/link"
 import { ExternalLink, Check, X } from "lucide-react"
 import { StarRating } from "@/components/ui/star-rating"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { goUrl } from "@/lib/affiliate"
+import { pushSelectItem } from "@/lib/analytics"
 import type { Product } from "@/types"
 
 interface ComparisonTableProps {
@@ -98,8 +101,9 @@ export function ComparisonTable({ products }: ComparisonTableProps) {
                       href={goUrl(product.affiliateUrl, { product: product.slug, category: product.categorySlug, source: "comparison-table" })}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => pushSelectItem({ product, cta: "Go to site", placement: "comparison-table", monetised: true })}
                     >
-                      Best Price <ExternalLink className="ml-1 h-3 w-3" />
+                      Go to site <ExternalLink className="ml-1 h-3 w-3" />
                     </a>
                   </Button>
                 ) : (
