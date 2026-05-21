@@ -20,7 +20,6 @@ export function buildMetadata({
 }): Metadata {
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`
   const url = `${SITE_URL}${path}`
-  const ogImage = image || `${SITE_URL}/og-default.jpg`
 
   return {
     title: fullTitle,
@@ -32,7 +31,7 @@ export function buildMetadata({
       description,
       url,
       siteName: SITE_NAME,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: fullTitle }],
+      ...(image && { images: [{ url: image, width: 1200, height: 630, alt: fullTitle }] }),
       locale: "en_AU",
       type: "website",
     },
@@ -40,11 +39,17 @@ export function buildMetadata({
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: [ogImage],
+      ...(image && { images: [image] }),
     },
     robots: noIndex
       ? { index: false, follow: false }
-      : { index: true, follow: true, "max-image-preview": "large" },
+      : {
+          index: true,
+          follow: true,
+          "max-image-preview": "large",
+          "max-snippet": -1,
+          "max-video-preview": -1,
+        },
   }
 }
 
@@ -94,6 +99,33 @@ export function breadcrumbJsonLd(
       position: index + 1,
       name: item.name,
       item: `${SITE_URL}${item.href}`,
+    })),
+  }
+}
+
+export function itemListJsonLd({
+  name,
+  description,
+  path,
+  items,
+}: {
+  name: string
+  description: string
+  path: string
+  items: { name: string; slug: string; categorySlug: string }[]
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name,
+    description,
+    url: `${SITE_URL}${path}`,
+    numberOfItems: items.length,
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      url: `${SITE_URL}/products/${item.categorySlug}/${item.slug}`,
     })),
   }
 }

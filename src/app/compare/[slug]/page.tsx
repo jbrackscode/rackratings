@@ -4,7 +4,7 @@ import { ComparisonTable } from "@/components/ratings/comparison-table"
 import { RatingCard } from "@/components/ratings/rating-card"
 import { PageMasthead } from "@/components/layout/page-masthead"
 import { products, getCategoryBySlug, categories } from "@/lib/data"
-import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo"
+import { buildMetadata, breadcrumbJsonLd, itemListJsonLd } from "@/lib/seo"
 import type { Metadata } from "next"
 
 interface Props {
@@ -40,9 +40,17 @@ export default async function CompareByCategory({ params }: Props) {
     { name: cat.name, href: `/compare/${slug}` },
   ])
 
+  const itemListLd = itemListJsonLd({
+    name: `Compare ${cat.name} – Side-by-Side Ratings & Specs`,
+    description: `Side-by-side specs, ratings, and prices for the best ${cat.name.toLowerCase()} in Australia.`,
+    path: `/compare/${slug}`,
+    items: categoryProducts,
+  })
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }} />
 
       <PageMasthead
         breadcrumbs={[

@@ -4,7 +4,7 @@ import { RatingCard } from "@/components/ratings/rating-card"
 import { AdvertorialCard } from "@/components/advertorial/advertorial-card"
 import { PageMasthead } from "@/components/layout/page-masthead"
 import { categories, getProductsByCategory, getCategoryBySlug, advertorials } from "@/lib/data"
-import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo"
+import { buildMetadata, breadcrumbJsonLd, itemListJsonLd } from "@/lib/seo"
 import type { Metadata } from "next"
 
 interface Props {
@@ -37,17 +37,28 @@ export default async function CategoryPage({ params }: Props) {
     (ad) => ad.category.toLowerCase() === cat.name.toLowerCase()
   )
 
-  const jsonLd = breadcrumbJsonLd([
+  const breadcrumbLd = breadcrumbJsonLd([
     { name: "Home", href: "/" },
     { name: "Categories", href: "/categories" },
     { name: cat.name, href: `/categories/${cat.slug}` },
   ])
 
+  const itemListLd = itemListJsonLd({
+    name: `Best ${cat.name} in Australia ${new Date().getFullYear()}`,
+    description: cat.description,
+    path: `/categories/${cat.slug}`,
+    items: products,
+  })
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }}
       />
 
       <PageMasthead

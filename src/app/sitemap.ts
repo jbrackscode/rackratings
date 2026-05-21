@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next"
-import { categories, products, advertorials, blogPosts } from "@/lib/data"
+import { categories, products, advertorials, blogPosts, brands } from "@/lib/data"
 
 const BASE_URL = "https://rackratings.com.au"
 
@@ -92,11 +92,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
+  const brandRoutes: MetadataRoute.Sitemap = [
+    { url: `${BASE_URL}/brands`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    ...brands.map((brand) => ({
+      url: `${BASE_URL}/brands/${brand.slug}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
+  ]
+
   return [
     ...staticRoutes,
     ...categoryRoutes,
     ...compareRoutes,
     ...productRoutes,
+    ...brandRoutes,
     ...advertorialRoutes,
     ...blogRoutes,
   ]
