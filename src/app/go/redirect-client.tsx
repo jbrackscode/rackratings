@@ -3,6 +3,22 @@
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
+function buildDestUrl(rawUrl: string, category: string | null, source: string | null): string {
+  try {
+    const dest = new URL(rawUrl)
+    // Don't overwrite UTMs the advertiser has already set
+    if (!dest.searchParams.has("utm_source")) {
+      dest.searchParams.set("utm_source", "rackratings")
+      dest.searchParams.set("utm_medium", "affiliate")
+      if (category) dest.searchParams.set("utm_campaign", category)
+      if (source) dest.searchParams.set("utm_content", source)
+    }
+    return dest.toString()
+  } catch {
+    return rawUrl
+  }
+}
+
 export function RedirectClient() {
   const params = useSearchParams()
   const url = params.get("url")
@@ -18,9 +34,11 @@ export function RedirectClient() {
       return
     }
 
+    const destUrl = buildDestUrl(url, category, source)
+
     const timeout = setTimeout(() => {
       setStatus("redirecting")
-      window.location.href = url
+      window.location.href = destUrl
     }, 2000)
 
     fetch("/api/track-click", {
@@ -32,7 +50,7 @@ export function RedirectClient() {
       .finally(() => {
         clearTimeout(timeout)
         setStatus("redirecting")
-        window.location.href = url
+        window.location.href = destUrl
       })
 
     return () => clearTimeout(timeout)
