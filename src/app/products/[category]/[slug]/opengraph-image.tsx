@@ -13,7 +13,8 @@ export default async function Image({ params }: { params: Promise<{ category: st
   const rating = product?.rating ?? 0
   const price = product?.priceFormatted ?? ""
 
-  const stars = "★".repeat(Math.round(rating)) + "☆".repeat(5 - Math.round(rating))
+  const filledStars = Math.round(rating)
+  const emptyStars = 5 - filledStars
 
   return new ImageResponse(
     (
@@ -28,30 +29,42 @@ export default async function Image({ params }: { params: Promise<{ category: st
           justifyContent: "center",
           padding: "80px",
           fontFamily: "sans-serif",
+          position: "relative",
         }}
       >
-        <div style={{ fontSize: 18, color: "#4b6a8a", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 20 }}>
-          RackRatings Review
+        <div style={{ fontSize: 18, color: "#4b6a8a", fontWeight: 700, letterSpacing: "0.12em", marginBottom: 20, display: "flex" }}>
+          RACKRATINGS REVIEW
         </div>
 
-        <div style={{ width: 60, height: 6, background: "#3b82f6", borderRadius: 3, marginBottom: 32 }} />
+        <div style={{ width: 60, height: 6, background: "#3b82f6", borderRadius: 3, marginBottom: 32, display: "flex" }} />
 
-        <div style={{ fontSize: 56, fontWeight: 900, color: "#ffffff", lineHeight: 1.1, maxWidth: 850, marginBottom: 16 }}>
+        <div style={{ fontSize: 56, fontWeight: 900, color: "#ffffff", lineHeight: 1.1, maxWidth: 850, marginBottom: 16, display: "flex" }}>
           {name}
         </div>
 
-        {brand && (
-          <div style={{ fontSize: 28, color: "#93c5fd", fontWeight: 600, marginBottom: 32 }}>
+        {brand ? (
+          <div style={{ fontSize: 28, color: "#93c5fd", fontWeight: 600, marginBottom: 32, display: "flex" }}>
             {brand}
           </div>
+        ) : (
+          <div style={{ marginBottom: 32, display: "flex" }} />
         )}
 
         <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span style={{ fontSize: 32, color: "#f59e0b", letterSpacing: 2 }}>{stars}</span>
-            <span style={{ fontSize: 32, fontWeight: 800, color: "#ffffff" }}>{rating}/5</span>
+            <div style={{ display: "flex", gap: 2 }}>
+              {Array.from({ length: filledStars }).map((_, i) => (
+                <div key={i} style={{ fontSize: 32, color: "#f59e0b", display: "flex" }}>★</div>
+              ))}
+              {Array.from({ length: emptyStars }).map((_, i) => (
+                <div key={i} style={{ fontSize: 32, color: "#334d6b", display: "flex" }}>★</div>
+              ))}
+            </div>
+            <div style={{ fontSize: 32, fontWeight: 800, color: "#ffffff", display: "flex" }}>
+              {rating}/5
+            </div>
           </div>
-          {price && (
+          {price ? (
             <div
               style={{
                 background: "#1e3a5f",
@@ -60,11 +73,12 @@ export default async function Image({ params }: { params: Promise<{ category: st
                 fontSize: 26,
                 color: "#ffffff",
                 fontWeight: 800,
+                display: "flex",
               }}
             >
               {price}
             </div>
-          )}
+          ) : null}
         </div>
 
         <div
@@ -76,6 +90,7 @@ export default async function Image({ params }: { params: Promise<{ category: st
             color: "#4b6a8a",
             fontWeight: 700,
             letterSpacing: "0.05em",
+            display: "flex",
           }}
         >
           rackratings.com.au

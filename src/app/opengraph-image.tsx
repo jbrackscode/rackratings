@@ -18,16 +18,22 @@ export default function Image() {
           justifyContent: "center",
           padding: "80px",
           fontFamily: "sans-serif",
+          position: "relative",
         }}
       >
-        {/* Accent bar */}
-        <div style={{ width: 60, height: 6, background: "#3b82f6", borderRadius: 3, marginBottom: 40 }} />
+        <div style={{ width: 60, height: 6, background: "#3b82f6", borderRadius: 3, marginBottom: 40, display: "flex" }} />
 
-        <div style={{ fontSize: 72, fontWeight: 900, color: "#ffffff", lineHeight: 1, marginBottom: 20 }}>
+        <div style={{ fontSize: 72, fontWeight: 900, color: "#ffffff", lineHeight: 1, marginBottom: 20, display: "flex" }}>
           RackRatings
         </div>
-        <div style={{ fontSize: 30, color: "#93c5fd", fontWeight: 500, lineHeight: 1.4, maxWidth: 700 }}>
-          Australia&apos;s #1 Vehicle Rack<br />Comparison &amp; Rating Site
+
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ fontSize: 30, color: "#93c5fd", fontWeight: 500 }}>
+            Australia&apos;s #1 Vehicle Rack
+          </div>
+          <div style={{ fontSize: 30, color: "#93c5fd", fontWeight: 500 }}>
+            Comparison &amp; Rating Site
+          </div>
         </div>
 
         <div
@@ -39,6 +45,7 @@ export default function Image() {
             color: "#4b6a8a",
             fontWeight: 600,
             letterSpacing: "0.05em",
+            display: "flex",
           }}
         >
           rackratings.com.au

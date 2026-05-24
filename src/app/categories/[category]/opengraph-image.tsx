@@ -24,13 +24,14 @@ export default async function Image({ params }: { params: Promise<{ category: st
           justifyContent: "center",
           padding: "80px",
           fontFamily: "sans-serif",
+          position: "relative",
         }}
       >
-        <div style={{ fontSize: 56, marginBottom: 24 }}>{icon}</div>
+        <div style={{ fontSize: 56, marginBottom: 24, display: "flex" }}>{icon}</div>
 
-        <div style={{ width: 60, height: 6, background: "#3b82f6", borderRadius: 3, marginBottom: 32 }} />
+        <div style={{ width: 60, height: 6, background: "#3b82f6", borderRadius: 3, marginBottom: 32, display: "flex" }} />
 
-        <div style={{ fontSize: 54, fontWeight: 900, color: "#ffffff", lineHeight: 1.15, maxWidth: 900, marginBottom: 24 }}>
+        <div style={{ fontSize: 54, fontWeight: 900, color: "#ffffff", lineHeight: 1.15, maxWidth: 900, marginBottom: 24, display: "flex" }}>
           {heading}
         </div>
 
@@ -43,11 +44,14 @@ export default async function Image({ params }: { params: Promise<{ category: st
               fontSize: 22,
               color: "#93c5fd",
               fontWeight: 600,
+              display: "flex",
             }}
           >
             {productCount} products rated
           </div>
-          <div style={{ fontSize: 22, color: "#4b6a8a", fontWeight: 600 }}>Prices in AUD</div>
+          <div style={{ fontSize: 22, color: "#4b6a8a", fontWeight: 600, display: "flex" }}>
+            Prices in AUD
+          </div>
         </div>
 
         <div
@@ -59,6 +63,7 @@ export default async function Image({ params }: { params: Promise<{ category: st
             color: "#4b6a8a",
             fontWeight: 700,
             letterSpacing: "0.05em",
+            display: "flex",
           }}
         >
           rackratings.com.au
