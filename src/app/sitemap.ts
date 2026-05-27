@@ -92,6 +92,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
+  const reviewPageRoutes: MetadataRoute.Sitemap = [
+    { url: `${BASE_URL}/jb-racks-reviews`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+  ]
+
   const brandRoutes: MetadataRoute.Sitemap = [
     { url: `${BASE_URL}/brands`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     ...brands.map((brand) => ({
@@ -104,6 +108,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticRoutes,
+    ...reviewPageRoutes,
     ...categoryRoutes,
     ...compareRoutes,
     ...productRoutes,

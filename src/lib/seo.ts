@@ -103,6 +103,49 @@ export function breadcrumbJsonLd(
   }
 }
 
+export function faqJsonLd(items: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map(({ question, answer }) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: { "@type": "Answer", text: answer },
+    })),
+  }
+}
+
+export function articleJsonLd({
+  headline,
+  description,
+  path,
+  datePublished,
+  dateModified,
+}: {
+  headline: string
+  description: string
+  path: string
+  datePublished: string
+  dateModified: string
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline,
+    description,
+    url: `${SITE_URL}${path}`,
+    datePublished,
+    dateModified,
+    author: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.svg` },
+    },
+  }
+}
+
 export function itemListJsonLd({
   name,
   description,
