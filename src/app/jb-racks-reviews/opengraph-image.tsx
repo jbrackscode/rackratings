@@ -41,7 +41,7 @@ export default function Image() {
         </div>
 
         <div style={{ display: "flex", gap: 16 }}>
-          {["15,000+ Australian owners", "4-year warranty", "Free AU shipping"].map((tag) => (
+          {["15,000+ customers worldwide", "4-year warranty", "Free AU shipping"].map((tag) => (
             <div
               key={tag}
               style={{

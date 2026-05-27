@@ -22,7 +22,7 @@ export const metadata: Metadata = buildMetadata({
 const faqs = [
   {
     question: "Are JB Racks worth buying in Australia?",
-    answer: `Yes. JB Racks are independently rated 4.9/5 by RackRatings and have sold to over 15,000 Australian families. They offer the best price-per-bike capacity of any hitch rack in Australia, with free shipping, a 4-year warranty, and a South Australian support team. Our verdict: they are the best-value vertical bike rack available in Australia in ${YEAR}.`,
+    answer: `Yes. JB Racks are independently rated 4.9/5 by RackRatings and have sold to over 15,000 customers worldwide. They offer the best price-per-bike capacity of any hitch rack in Australia, with free shipping, a 4-year warranty, and a South Australian support team. Our verdict: they are the best-value vertical bike rack available in Australia in ${YEAR}.`,
   },
   {
     question: "Where are JB Racks manufactured?",
@@ -175,7 +175,7 @@ export default function JBRacksReviewsPage() {
                 </div>
                 <div className="h-10 w-px bg-blue-800" />
                 <div className="flex flex-col gap-1 text-sm text-blue-200">
-                  <span>✓ 15,000+ Australian families</span>
+                  <span>✓ 15,000+ customers worldwide</span>
                   <span>✓ 4-year warranty</span>
                   <span>✓ Free shipping nationwide</span>
                 </div>

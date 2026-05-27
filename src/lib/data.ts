@@ -154,7 +154,7 @@ export const products: Product[] = [
     categorySlug: "vertical-bike-racks",
     brand: "JB Racks",
     description:
-      "The JB Racks 4 Vertical Bike Rack is the original and most popular model in the JB Racks lineup. Trusted by over 15,000 Australian riders, it holds 4 bikes vertically on a 2in hitch with a 100 kg total load capacity. The go-to rack for Australian mountain bikers and e-bike owners.",
+      "The JB Racks 4 Vertical Bike Rack is the original and most popular model in the JB Racks lineup. Trusted by over 15,000 customers worldwide, it holds 4 bikes vertically on a 2in hitch with a 100 kg total load capacity. The go-to rack for Australian mountain bikers and e-bike owners.",
     rating: 4.9,
     reviewCount: 4218,
     price: 899,
@@ -162,7 +162,7 @@ export const products: Product[] = [
     image: "/images/jb-racks-4-bike.jpg",
     pros: [
       "Most popular vertical rack in Australia",
-      "Trusted by 15,000+ Australian customers",
+      "Trusted by 15,000+ customers worldwide",
       "100 kg total load capacity",
       "Anti-wobble hitch bracket",
       "Height-adjustable bottom bar (+/- 170 mm)",
@@ -713,9 +713,9 @@ JB Racks, a South Australian company founded by Jameson Broadbent in 2020, built
 - **Anti-Wobble Hitch**: JB's integrated anti-wobble bracket eliminates the sway and rattle that makes cheaper hitch racks so nerve-wracking at highway speeds.
 - **Australian-Designed**: JB Racks are built to Australian road conditions, Australian tow bar standards, and Australian family needs.
 
-**What 15,000+ Australian Customers Say**
+**What 15,000+ Customers Say**
 
-The numbers don't lie. Over 15,000 Australian households have switched to JB Racks. The most common feedback? They wish they'd made the switch sooner.
+The numbers don't lie. Over 15,000 customers worldwide have switched to JB Racks. The most common feedback? They wish they'd made the switch sooner.
 
 The 4-year warranty is the longest in the category. Free shipping Australia-wide makes ordering easy. And if you want the full setup, the bundle with slow-fold strut and shed stand saves you AU$300.
 
@@ -808,7 +808,7 @@ export const blogPosts: BlogPost[] = [
     slug: "jb-racks-review-2025",
     title: "JB Racks Review 2025: Are Australia's Most Popular Vertical Bike Racks Worth It?",
     excerpt:
-      "JB Racks has sold to 15,000+ Australian families. We put the 4-bike, 5-bike, and 6-bike models through their paces to give you the definitive verdict.",
+      "JB Racks has sold to 15,000+ customers worldwide. We put the 4-bike, 5-bike, and 6-bike models through their paces to give you the definitive verdict.",
     body: "",
     author: "RackRatings Editorial",
     category: "Vertical Bike Racks",
@@ -1019,7 +1019,7 @@ export const brands: Brand[] = [
   {
     slug: "jb-racks",
     name: "JB Racks",
-    description: "South Australian company founded by Jameson Broadbent, making Australia's most popular hitch-mounted vertical bike racks. Trusted by over 15,000 Australian families with a 4-year warranty and free shipping nationwide.",
+    description: "South Australian company founded by Jameson Broadbent, making Australia's most popular hitch-mounted vertical bike racks. Trusted by over 15,000 customers worldwide with a 4-year warranty and free shipping nationwide.",
     country: "Australia",
     website: "https://jbracks.com.au",
     categories: ["Vertical Bike Racks", "Hitch Bike Racks"],
