@@ -25,8 +25,8 @@ export default function HomePage() {
         {/* Hero photo – right half */}
         <div className="absolute inset-y-0 right-0 w-[55%] hidden lg:block">
           <Image
-            src="https://images.unsplash.com/photo-1698534379981-363e66747a34?auto=format&fit=crop&w=1400&q=85"
-            alt="Truck with bike rack"
+            src="https://images.unsplash.com/photo-1767566927815-04cf0631bfed?auto=format&fit=crop&w=1400&q=85"
+            alt="4WD truck on rocky terrain"
             fill
             className="object-cover object-center"
             priority
@@ -82,12 +82,12 @@ export default function HomePage() {
         {/* Photo credit */}
         <div className="absolute bottom-2 right-3 hidden lg:block">
           <a
-            href="https://unsplash.com/@grahammansfield1"
+            href="https://unsplash.com/@4wheelhouse"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[10px] text-white/20 hover:text-white/40 transition-colors"
           >
-            Photo: G. Mansfield / Unsplash
+            Photo: 4Wheelhouse / Unsplash
           </a>
         </div>
 
