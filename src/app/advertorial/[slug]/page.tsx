@@ -45,16 +45,6 @@ export default async function AdvertorialPage({ params }: Props) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
 
-      {/* Top disclosure banner */}
-      <div className="bg-amber-50 border-b border-amber-200">
-        <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <AdvertorialBadge disclosure={ad.disclosure} />
-            <p className="text-xs text-amber-800">{ad.disclosure}</p>
-          </div>
-        </div>
-      </div>
-
       <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
         {/* Breadcrumb */}
         <nav className="text-sm text-gray-500 mb-6">
@@ -62,17 +52,16 @@ export default async function AdvertorialPage({ params }: Props) {
           <span className="mx-2">/</span>
           <Link href={`/categories/${ad.category.toLowerCase()}`} className="hover:text-gray-700">{ad.category}</Link>
           <span className="mx-2">/</span>
-          <span className="text-gray-900 truncate">Sponsored</span>
+          <span className="text-gray-900 truncate">{ad.brand}</span>
         </nav>
 
         {/* Header */}
         <div className="mb-6">
-          <AdvertorialBadge disclosure={ad.disclosure} />
+          <AdvertorialBadge />
           <h1 className="mt-4 text-3xl font-bold text-gray-900 leading-tight">{ad.title}</h1>
           <p className="mt-3 text-lg text-gray-600 leading-relaxed">{ad.excerpt}</p>
           <p className="mt-2 text-sm text-gray-400">
-            Published {new Date(ad.publishedAt).toLocaleDateString("en-AU", { year: "numeric", month: "long", day: "numeric" })} ·
-            Produced in partnership with <strong className="text-gray-600">{ad.brand}</strong>
+            Published {new Date(ad.publishedAt).toLocaleDateString("en-AU", { year: "numeric", month: "long", day: "numeric" })} · {ad.brand}
           </p>
         </div>
 
@@ -124,12 +113,6 @@ export default async function AdvertorialPage({ params }: Props) {
           </Button>
         </div>
 
-        {/* Bottom disclosure */}
-        <div className="mt-8 rounded-xl bg-gray-50 border border-gray-200 p-4">
-          <p className="text-xs text-gray-500 leading-relaxed">
-            <strong>Disclosure:</strong> {ad.disclosure}
-          </p>
-        </div>
       </article>
     </>
   )

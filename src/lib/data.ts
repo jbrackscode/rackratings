@@ -728,7 +728,7 @@ Click below to find the right JB Racks model for your family.
     image: "/images/jb-racks-advertorial.jpg",
     category: "Vertical Bike Racks",
     publishedAt: "2025-04-01",
-    disclosure: "JB Racks is the owner of RackRatings. All editorial product ratings remain independent. This content is produced by JB Racks.",
+    disclosure: "Paid partnership with JB Racks.",
   },
   {
     slug: "rhinorack-4wd-setup-guide",
@@ -757,7 +757,7 @@ Rhino-Rack Australia is offering RackRatings readers free installation guides an
     image: "/images/rhinorack-advertorial.jpg",
     category: "Ute & Van Racks",
     publishedAt: "2025-03-10",
-    disclosure: "This is a paid advertorial produced in partnership with Rhino-Rack Australia. Our editorial team maintains independence in all product ratings and scores.",
+    disclosure: "Paid partnership with Rhino-Rack Australia.",
   },
   {
     slug: "thule-hitch-rack-ebike-guide",
@@ -786,7 +786,7 @@ Thule Australia has partnered with RackRatings to offer exclusive access to the 
     image: "/images/thule-advertorial.jpg",
     category: "Hitch Bike Racks",
     publishedAt: "2025-02-20",
-    disclosure: "This is a paid advertorial produced in partnership with Thule Australia. All product ratings on RackRatings are editorially independent and not influenced by advertising relationships.",
+    disclosure: "Paid partnership with Thule Australia.",
   },
 ]
 

@@ -434,9 +434,6 @@ export default function JBRacksReviewsPage() {
               </div>
             </section>
 
-            <p className="text-xs text-gray-400 leading-relaxed">
-              <strong>Editorial note:</strong> RackRatings is owned by JB Racks. Product ratings are assigned independently by our editorial team based on specifications, customer feedback, and comparative testing. We maintain editorial independence across all rated products.
-            </p>
           </main>
 
           {/* ── Sidebar ── */}

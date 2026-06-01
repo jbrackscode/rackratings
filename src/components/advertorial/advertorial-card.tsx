@@ -2,7 +2,6 @@ import Link from "next/link"
 import { ExternalLink } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { goUrl } from "@/lib/affiliate"
 import type { Advertorial } from "@/types"
 
@@ -15,7 +14,7 @@ export function AdvertorialCard({ advertorial }: AdvertorialCardProps) {
     <Card className="border-amber-200 bg-amber-50/30">
       <CardContent className="p-5">
         <div className="flex items-start justify-between gap-3 mb-3">
-          <Badge variant="sponsored">Sponsored</Badge>
+          <span className="text-[10px] font-medium tracking-wide text-gray-400 border border-gray-200 rounded-full px-2.5 py-0.5">Paid partnership</span>
           <span className="text-xs text-gray-400">{advertorial.brand}</span>
         </div>
         <Link
