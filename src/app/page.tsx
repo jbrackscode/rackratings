@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight, ShieldCheck, Zap, Users, ChevronRight } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { RatingCard } from "@/components/ratings/rating-card"
@@ -19,11 +20,22 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ── Homepage masthead (InfoChoice-style image hero) ── */}
+      {/* ── Homepage masthead ── */}
       <section className="relative bg-[#0d2340] overflow-hidden">
-        {/* Diagonal accent shape */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0d2340] via-[#112d52] to-[#0a3a6b] opacity-100" />
-        <div className="absolute bottom-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-600/20 to-transparent pointer-events-none" />
+        {/* Hero photo – right half */}
+        <div className="absolute inset-y-0 right-0 w-1/2 hidden lg:block">
+          <Image
+            src="https://images.unsplash.com/photo-1698534379981-363e66747a34?auto=format&fit=crop&w=1200&q=80"
+            alt="Truck with bike rack"
+            fill
+            className="object-cover object-center opacity-40"
+            priority
+          />
+          {/* Fade from navy on the left edge */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0d2340] via-[#0d2340]/60 to-transparent" />
+        </div>
+        {/* Subtle base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0d2340] via-[#112d52]/80 to-transparent pointer-events-none" />
 
         <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
@@ -63,6 +75,18 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
+        </div>
+
+        {/* Photo credit */}
+        <div className="absolute bottom-2 right-3 hidden lg:block">
+          <a
+            href="https://unsplash.com/@grahammansfield1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] text-white/20 hover:text-white/40 transition-colors"
+          >
+            Photo: G. Mansfield / Unsplash
+          </a>
         </div>
 
         {/* Trust / stats bar */}
