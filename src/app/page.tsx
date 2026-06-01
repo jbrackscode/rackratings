@@ -23,19 +23,21 @@ export default function HomePage() {
       {/* ── Homepage masthead ── */}
       <section className="relative bg-[#0d2340] overflow-hidden">
         {/* Hero photo – right half */}
-        <div className="absolute inset-y-0 right-0 w-1/2 hidden lg:block">
+        <div className="absolute inset-y-0 right-0 w-[55%] hidden lg:block">
           <Image
-            src="https://images.unsplash.com/photo-1698534379981-363e66747a34?auto=format&fit=crop&w=1200&q=80"
+            src="https://images.unsplash.com/photo-1698534379981-363e66747a34?auto=format&fit=crop&w=1400&q=85"
             alt="Truck with bike rack"
             fill
-            className="object-cover object-center opacity-40"
+            className="object-cover object-center"
             priority
           />
-          {/* Fade from navy on the left edge */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0d2340] via-[#0d2340]/60 to-transparent" />
+          {/* Narrow fade on left edge only */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0d2340] via-[#0d2340]/30 to-transparent w-[60%]" />
+          {/* Very subtle dark veil so text stays readable */}
+          <div className="absolute inset-0 bg-black/10" />
         </div>
-        {/* Subtle base gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0d2340] via-[#112d52]/80 to-transparent pointer-events-none" />
+        {/* Left side base colour */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0d2340] via-[#0d2340] to-transparent w-[50%]" />
 
         <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
