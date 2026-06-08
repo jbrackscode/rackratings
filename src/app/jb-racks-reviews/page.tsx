@@ -131,7 +131,18 @@ export default function JBRacksReviewsPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       {/* ── Hero masthead ── */}
-      <div className="bg-[#0d2340] text-white">
+      <div className="relative bg-[#0d2340] text-white overflow-hidden">
+        {/* Feature image – right half, lg+ only */}
+        <div className="absolute inset-y-0 right-0 w-[45%] hidden lg:block">
+          <Image
+            src="/images/reviews/jb-racks-reviews.webp"
+            alt="JB Racks vertical bike rack in use"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0d2340] via-[#0d2340]/40 to-transparent" />
+        </div>
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-1.5 text-xs text-blue-300 mb-6 flex-wrap">
