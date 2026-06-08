@@ -31,7 +31,7 @@ const faqs = [
   },
   {
     question: "How do JB Racks compare to Thule?",
-    answer: "JB Racks hold more bikes at a lower price point. The JB Racks 4-bike rack (AU$899) holds 4 bikes vs the Thule T2 Pro XT (AU$1,299+) which holds 2. JB Racks wins on value, capacity, and warranty length (4 years vs 3 years). Thule has a slight edge in premium finish and brand heritage. For Australian families who need to carry multiple bikes, JB Racks is the better choice.",
+    answer: "JB Racks hold more bikes at a lower price point. The JB Racks 4-bike rack (AU$950) holds 4 bikes vs the Thule T2 Pro XT (AU$1,299+) which holds 2. JB Racks wins on value, capacity, and warranty length (4 years vs 3 years). Thule has a slight edge in premium finish and brand heritage. For Australian families who need to carry multiple bikes, JB Racks is the better choice.",
   },
   {
     question: "What is the JB Racks warranty?",
@@ -115,7 +115,7 @@ export default function JBRacksReviewsPage() {
     })),
     offers: {
       "@type": "Offer",
-      price: flagship?.price ?? 899,
+      price: flagship?.price ?? 950,
       priceCurrency: "AUD",
       availability: "https://schema.org/InStock",
     },
@@ -430,7 +430,7 @@ export default function JBRacksReviewsPage() {
                       ["Warranty", "4 years", "3 years"],
                       ["Shipping", "Free (AU-wide)", "Varies by retailer"],
                       ["Origin", "South Australian brand", "Swedish brand"],
-                      ["RackRatings score", "4.9/5", "4.7/5"],
+                      ["RackRatings score", `${avgRating}/5`, "4.7/5"],
                     ].map(([feature, jb, thule], i) => (
                       <tr key={feature} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                         <td className="px-4 py-2.5 font-medium text-gray-600 text-xs">{feature}</td>
@@ -442,7 +442,7 @@ export default function JBRacksReviewsPage() {
                 </table>
               </div>
               <p className="text-gray-700 text-[15px] leading-relaxed">
-                <strong>Our recommendation:</strong> For most Australian families — especially those with 3 or more bikes or heavy e-bikes — JB Racks is the clear winner. The 4-bike capacity at AU$899 beats the Thule 2-bike at AU$1,299+ on every practical metric. Thule&apos;s finish and heritage are premium, but for Australian conditions and budgets, JB Racks delivers more.
+                <strong>Our recommendation:</strong> For most Australian families — especially those with 3 or more bikes or heavy e-bikes — JB Racks is the clear winner. The 4-bike capacity at AU$950 beats the Thule 2-bike at AU$1,299+ on every practical metric. Thule&apos;s finish and heritage are premium, but for Australian conditions and budgets, JB Racks delivers more.
               </p>
             </section>
 
@@ -466,7 +466,7 @@ export default function JBRacksReviewsPage() {
             <section id="bottom-line" className="rounded-2xl bg-[#0d2340] text-white p-8 mb-6">
               <h2 className="text-2xl font-bold mb-3">Bottom Line: Should You Buy JB Racks?</h2>
               <p className="text-blue-200 leading-relaxed mb-6 text-[15px]">
-                If you need to carry 2 or more bikes in Australia — especially e-bikes — JB Racks is the best value option on the market in {YEAR}. The 4-year warranty, free Australia-wide shipping, and 15,000+ happy customers speak for themselves. Our rating of <strong className="text-white">4.9/5</strong> reflects a product that consistently delivers on its promises.
+                If you need to carry 2 or more bikes in Australia — especially e-bikes — JB Racks is the best value option on the market in {YEAR}. The 4-year warranty, free Australia-wide shipping, and 15,000+ happy customers speak for themselves. Our rating of <strong className="text-white">{avgRating}/5</strong> reflects a product that consistently delivers on its promises.
               </p>
               <div className="flex flex-wrap gap-3">
                 {flagship?.affiliateUrl && (
@@ -500,9 +500,9 @@ export default function JBRacksReviewsPage() {
                   JB Racks 4 Vertical Bike Rack
                 </Link>
                 <div className="flex items-center gap-2 mb-3">
-                  <StarRating rating={4.9} size="sm" showValue />
+                  <StarRating rating={avgRating} size="sm" showValue />
                 </div>
-                <div className="text-2xl font-black text-gray-900 mb-3">AU$899</div>
+                <div className="text-2xl font-black text-gray-900 mb-3">AU$950</div>
                 {flagship?.affiliateUrl && (
                   <TrackedCta
                     href={goUrl(flagship.affiliateUrl, { product: flagship.slug, category: flagship.categorySlug, source: "jb-racks-reviews-sidebar" })}
