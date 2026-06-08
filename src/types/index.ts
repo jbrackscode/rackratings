@@ -37,6 +37,7 @@ export interface Review {
   body: string
   verified: boolean
   date: string
+  image?: string
 }
 
 export interface ComparisonProduct {
