@@ -80,7 +80,7 @@ export const products: Product[] = [
     reviewCount: 1847,
     price: 899,
     priceFormatted: "AU$899",
-    image: "/images/jb-racks-5-bike.jpg",
+    image: "https://jbracks.com.au/cdn/shop/files/5-bike-rack-black-new-photo-1.webp?v=1772750723",
     pros: [
       "Holds 5 bikes including e-bikes",
       "30 kg per wheel holder (150 kg total)",
@@ -120,7 +120,7 @@ export const products: Product[] = [
     reviewCount: 763,
     price: 899,
     priceFormatted: "AU$899",
-    image: "/images/jb-racks-6-bike.jpg",
+    image: "https://jbracks.com.au/cdn/shop/files/6-bike-rack-black-new-photo-1_bffb1fe4-771d-41b2-a1df-5843c955454d.webp?v=1767745737",
     pros: [
       "Carries 6 bikes in one go",
       "30 kg per wheel holder capacity",
@@ -159,7 +159,7 @@ export const products: Product[] = [
     reviewCount: 4218,
     price: 899,
     priceFormatted: "AU$899",
-    image: "/images/jb-racks-4-bike.jpg",
+    image: "https://jbracks.com.au/cdn/shop/files/4-bike-rack-black-new-photo-1.webp?v=1772752325",
     pros: [
       "Most popular vertical rack in Australia",
       "Trusted by 15,000+ customers worldwide",
@@ -200,7 +200,7 @@ export const products: Product[] = [
     reviewCount: 1523,
     price: 1199,
     priceFormatted: "AU$1,199",
-    image: "/images/jb-racks-bundle.jpg",
+    image: "https://jbracks.com.au/cdn/shop/files/4-rack-stand-strut-bundle.webp?v=1772752325",
     pros: [
       "Includes rack, slow-fold strut, and shed stand",
       "AU$300 saving vs buying separately",
@@ -238,7 +238,7 @@ export const products: Product[] = [
     reviewCount: 612,
     price: 649,
     priceFormatted: "AU$649",
-    image: "/images/jb-racks-lite.jpg",
+    image: "https://jbracks.com.au/cdn/shop/files/4-bike-rack-black-lightweight-1.png?format=webp&v=1761010264",
     pros: [
       "30% lighter than standard model",
       "Most affordable JB Racks option",
@@ -278,7 +278,7 @@ export const products: Product[] = [
     reviewCount: 1847,
     price: 899,
     priceFormatted: "AU$899",
-    image: "/images/jb-racks-5-bike.jpg",
+    image: "https://jbracks.com.au/cdn/shop/files/5-bike-rack-black-new-photo-1.webp?v=1772750723",
     pros: [
       "Best price-per-bike of any hitch rack in Australia",
       "Vertical design – no frame contact",
@@ -889,6 +889,16 @@ export const reviews: Review[] = [
     rating: 5,
     title: "Perfect for our family of four riders",
     body: "All four of our bikes fit perfectly, including my husband's 30 kg e-bike. The anti-wobble hitch is solid – no movement at all on the highway. Assembly took about 40 minutes. Highly recommended.",
+    verified: true,
+    date: "2025-03-15",
+  },
+  {
+    id: "jb12",
+    productSlug: "jb-racks-4-vertical-bike-rack",
+    author: "Robson M.",
+    rating: 3,
+    title: "Satisfied with product, instructions were not clear",
+    body: "I am stocked with the product and eager to use it. The rack seems stout and well built. The company could improve a lot more on the assembly manual. The box arrived completely broken down and I thought the product was ruined. Luckily they wrapped all parts in bubble wrap and that was enough to save everything. The instruction manual was missing from the box. There was no instruction manual to download for the garage stand but I was able to figure out from pictures. The manual for the bike rack does not contain a detailed part list. The step by step process is far from detailed and you have to flip through videos and pictures in the website to figure out how to put together. Improving the manual would make the company look a lot more professional and help the end user experience.",
     verified: true,
     date: "2025-03-15",
   },

@@ -354,6 +354,36 @@ export default function JBRacksReviewsPage() {
               </div>
             </section>
 
+{/* ── JB Loading Demo ── */}
+<section id="loading" className="mb-12">
+  <h2 className="text-2xl font-bold text-gray-900 mb-4">JB Racks Vertical Rack Demo</h2>
+  <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
+    <iframe
+      src="https://www.youtube.com/embed/0_kZpaTMghE"
+      title="JB Racks vertical bike rack loading demo"
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+    />
+  </div>
+</section>
+
+{/* ── JB Roadtest Demo ── */}
+<section id="roadtest" className="mb-12">
+  <h2 className="text-2xl font-bold text-gray-900 mb-4">JB Racks Road Tested</h2>
+  <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
+    <iframe
+      src="https://www.youtube.com/embed/R-spd-yh_XM"
+      title="JB Racks road test"
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+    />
+  </div>
+</section>
+
             {/* ── JB Racks vs Thule ── */}
             <section id="vs-thule" className="mb-12">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">JB Racks vs Thule — Which is Better for Australians?</h2>
@@ -371,7 +401,7 @@ export default function JBRacksReviewsPage() {
                   </thead>
                   <tbody>
                     {[
-                      ["Price (AUD)", "AU$899", "AU$1,299+"],
+                      ["Price (AUD)", "AU$950", "AU$1,499"],
                       ["Bike capacity", "4 bikes", "2 bikes"],
                       ["E-bike support", "30 kg each ✓", "27 kg each ✓"],
                       ["Warranty", "4 years", "3 years"],
