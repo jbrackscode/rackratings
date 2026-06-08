@@ -269,6 +269,17 @@ export default function JBRacksReviewsPage() {
                 </p>
               </div>
 
+              {/* Feature image */}
+              <div className="mt-6 rounded-xl overflow-hidden">
+                <Image
+                  src="/images/reviews/jb-racks-reviews.webp"
+                  alt="JB Racks vertical bike rack in use"
+                  width={900}
+                  height={500}
+                  className="w-full object-cover"
+                />
+              </div>
+
               {/* Score breakdown */}
               <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {[
