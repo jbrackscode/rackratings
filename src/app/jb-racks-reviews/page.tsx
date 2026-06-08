@@ -607,8 +607,7 @@ function ReviewCard({
       {/* Review photo (customer upload) */}
       {review.image && (
         <div className="mb-4 rounded-lg overflow-hidden bg-gray-100 border border-gray-200 w-full">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={review.image} alt={`Review photo by ${review.author}`} className="w-full max-h-64 object-cover" loading="lazy" />
+          <Image src={review.image} alt={`Review photo by ${review.author}`} width={800} height={533} className="w-full max-h-64 object-cover" />
         </div>
       )}
       <div className="flex items-start justify-between gap-3 mb-3">

@@ -1002,7 +1002,7 @@ export const reviews: Review[] = [
     body: "We have rack set up on our RV tow vehicle, we are 1000 miles into a 3,800 mile trip and rack is working well. We have been on some rough roads and bikes are locked in. I have had two campers ask me about performance and said rack works as advertised. I am very happy with my purchase.",
     verified: true,
     date: "2026-06-01",
-    image: "https://media-dynamic.okendo.io/images/ab00a254-0ba8-411c-b535-d84dbf0433a4/e8785d3a-9440-4ee3-9ced-6e35751153f8.jpg",
+    image: "/images/reviews/jb-review-todd-b.jpg",
   },
   {
     id: "jb-site-2",
@@ -1013,7 +1013,7 @@ export const reviews: Review[] = [
     body: "Well built - easy to move.",
     verified: true,
     date: "2026-05-08",
-    image: "https://media-dynamic.okendo.io/images/442d4e28-7f23-47f9-ae79-9c376bb2d2c3/df99917c-9a6a-428f-8cf2-30404558eee2.jpg",
+    image: "/images/reviews/jb-review-danie-s-stand.jpg",
   },
   {
     id: "jb-site-3",
@@ -1024,7 +1024,7 @@ export const reviews: Review[] = [
     body: "Great value - well built.",
     verified: true,
     date: "2026-05-08",
-    image: "https://media-dynamic.okendo.io/images/442d4e28-7f23-47f9-ae79-9c376bb2d2c3/aa92b448-166b-4642-a064-81273fb8d593.jpg",
+    image: "/images/reviews/jb-review-danie-s-rack.jpg",
   },
   {
     id: "jb-site-4",
@@ -1035,7 +1035,7 @@ export const reviews: Review[] = [
     body: "Overall the experience wasn't bad. I ordered the 6 bike rack and it came in two shipments. First one arrived early. Second never left shipper. After assembly I noticed the left side wheel stops don't align perfectly with the bike tires. Customer service did help me with a discount on the strut and stand after the fact so I did like that. All in all it's a nice rack and it does perform.",
     verified: true,
     date: "2026-05-08",
-    image: "https://media-dynamic.okendo.io/images/ab00a254-0ba8-411c-b535-d84dbf0433a4/9a738a64-eb97-457f-9a93-59bb25182df7.jpg",
+    image: "/images/reviews/jb-review-miguel-m.jpg",
   },
   {
     id: "jb-site-5",
@@ -1046,7 +1046,7 @@ export const reviews: Review[] = [
     body: "Hi Jameson, so far the bike rack has performed outstanding. I am very happy with it. I did have to tweak it for my bike — I have a high end downhill MTB with a Fox 40 fork with a front fender. My solution solved the problem completely. I love the rack.",
     verified: true,
     date: "2026-04-08",
-    image: "https://media-dynamic.okendo.io/images/ab00a254-0ba8-411c-b535-d84dbf0433a4/de43012b-1764-43c2-8dba-19dfe41e59c2.jpg",
+    image: "/images/reviews/jb-review-sam-j-1.jpg",
   },
   {
     id: "jb-site-6",
@@ -1057,7 +1057,7 @@ export const reviews: Review[] = [
     body: "I love my JB Rack and garage stand. I've already had people asking about it. It is a great value and I am so glad I came across your ad. I had a minor issue with my front fender on my downhill MTB — I made a bracket fix that solved it completely. Again, I love the rack.",
     verified: true,
     date: "2026-03-08",
-    image: "https://media-dynamic.okendo.io/images/ab00a254-0ba8-411c-b535-d84dbf0433a4/aa230f0b-d80d-4e92-8ee6-35f5904894e7.jpg",
+    image: "/images/reviews/jb-review-sam-j-2.jpg",
   },
   {
     id: "jb-site-7",
@@ -1068,7 +1068,7 @@ export const reviews: Review[] = [
     body: "We absolutely love the bike rack for our family of 4. So easy to load and unload. Assembly instructions were a little wonky, but customer service was quick to respond to email and very helpful!",
     verified: true,
     date: "2025-12-08",
-    image: "https://media-dynamic.okendo.io/images/ab00a254-0ba8-411c-b535-d84dbf0433a4/aea8bb7d-0964-4880-82f8-a05c812074fc.jpg",
+    image: "/images/reviews/jb-review-sara-t.jpg",
   },
   {
     id: "jb-site-8",
@@ -1079,7 +1079,7 @@ export const reviews: Review[] = [
     body: "Fantastic quality. Stoked I bought this rack. Only knock is the assembly is a little time consuming but that's where it ends. Everything else is awesome. Bikes are easy to put on and take off. Was very surprised by how stable it was on the back of the car too! The shed stand is an epic idea.",
     verified: true,
     date: "2025-12-08",
-    image: "https://media-dynamic.okendo.io/images/442d4e28-7f23-47f9-ae79-9c376bb2d2c3/8722f514-09b1-41bf-ac96-92a50d68075f.jpg",
+    image: "/images/reviews/jb-review-lachlan-m.jpg",
   },
   {
     id: "jb-site-9",
@@ -1090,7 +1090,7 @@ export const reviews: Review[] = [
     body: "Ordered the rack, received a part that had to be replaced — JB Team acted swiftly and with no hassle and arranged a replacement, and looked after me for the inconvenience. Great customer support and so far really happy with the rack!!",
     verified: true,
     date: "2025-12-08",
-    image: "https://media-dynamic.okendo.io/images/442d4e28-7f23-47f9-ae79-9c376bb2d2c3/3b4bfbc1-c4b0-4f94-b014-74ec8065abaf.jpg",
+    image: "/images/reviews/jb-review-benjamin-q.jpg",
   },
 ]
 
