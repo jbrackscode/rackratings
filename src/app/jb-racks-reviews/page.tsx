@@ -606,8 +606,8 @@ function ReviewCard({
     <div className="rounded-xl border border-gray-200 bg-white p-5">
       {/* Review photo (customer upload) */}
       {review.image && (
-        <div className="mb-4 rounded-lg overflow-hidden bg-gray-100 border border-gray-200 w-full">
-          <Image src={review.image} alt={`Review photo by ${review.author}`} width={800} height={533} className="w-full max-h-64 object-cover" />
+        <div className="mb-4 flex justify-center">
+          <Image src={review.image} alt={`Review photo by ${review.author}`} width={320} height={213} className="rounded-lg object-cover max-w-[320px] w-full" />
         </div>
       )}
       <div className="flex items-start justify-between gap-3 mb-3">
