@@ -78,8 +78,8 @@ export const products: Product[] = [
       "The JB Racks 5 Vertical Bike Rack is the best-value hitch-mounted vertical rack in Australia. Made from Japanese Grade ISO Standard steel and carrying up to 5 bikes (including heavy e-bikes), it's the rack of choice for Australian families. Built by a South Australian company, backed by a 4-year warranty and free shipping.",
     rating: 4.9,
     reviewCount: 1847,
-    price: 899,
-    priceFormatted: "AU$899",
+    price: 950,
+    priceFormatted: "AU$950",
     image: "https://jbracks.com.au/cdn/shop/files/5-bike-rack-black-new-photo-1.webp?v=1772750723",
     pros: [
       "Holds 5 bikes including e-bikes",
@@ -118,8 +118,8 @@ export const products: Product[] = [
       "The JB Racks 6 Vertical Bike Rack is the largest hitch-mounted vertical rack available in Australia, carrying six bikes including e-bikes. Perfect for large families or group riding, with the same anti-wobble hitch and 4-year warranty as the rest of the JB Racks range.",
     rating: 4.9,
     reviewCount: 763,
-    price: 899,
-    priceFormatted: "AU$899",
+    price: 950,
+    priceFormatted: "AU$950",
     image: "https://jbracks.com.au/cdn/shop/files/6-bike-rack-black-new-photo-1_bffb1fe4-771d-41b2-a1df-5843c955454d.webp?v=1767745737",
     pros: [
       "Carries 6 bikes in one go",
@@ -157,8 +157,8 @@ export const products: Product[] = [
       "The JB Racks 4 Vertical Bike Rack is the original and most popular model in the JB Racks lineup. Trusted by over 15,000 customers worldwide, it holds 4 bikes vertically on a 2in hitch with a 100 kg total load capacity. The go-to rack for Australian mountain bikers and e-bike owners.",
     rating: 4.9,
     reviewCount: 4218,
-    price: 899,
-    priceFormatted: "AU$899",
+    price: 950,
+    priceFormatted: "AU$950",
     image: "https://jbracks.com.au/cdn/shop/files/4-bike-rack-black-new-photo-1.webp?v=1772752325",
     pros: [
       "Most popular vertical rack in Australia",
@@ -276,8 +276,8 @@ export const products: Product[] = [
       "JB Racks brings their class-leading vertical hitch rack to the comparison – holding 5 bikes upright on a 2in hitch with 30 kg per wheel holder capacity. At AU$899 with free shipping and a 4-year warranty, it's the highest-value hitch rack for Australian families on the market.",
     rating: 4.9,
     reviewCount: 1847,
-    price: 899,
-    priceFormatted: "AU$899",
+    price: 950,
+    priceFormatted: "AU$950",
     image: "https://jbracks.com.au/cdn/shop/files/5-bike-rack-black-new-photo-1.webp?v=1772750723",
     pros: [
       "Best price-per-bike of any hitch rack in Australia",
