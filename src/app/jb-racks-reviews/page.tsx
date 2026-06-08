@@ -238,8 +238,8 @@ export default function JBRacksReviewsPage() {
               <ol className="space-y-1.5 text-sm">
                 {[
                   ["#verdict", "RackRatings Independent Verdict"],
-                  ["#range", "The JB Racks Product Range"],
-                  ["#reviews", "Customer Reviews"],
+                  ["#reviews", "What Owners Are Saying"],
+                  ["#range", "The JB Racks Range"],
                   ["#vs-thule", "JB Racks vs Thule"],
                   ["#faq", "Frequently Asked Questions"],
                   ["#bottom-line", "Bottom Line"],
@@ -296,30 +296,50 @@ export default function JBRacksReviewsPage() {
               </div>
             </section>
 
-            {/* ── Product range ── */}
-            <section id="range" className="mb-12">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">The JB Racks Product Range</h2>
-              <p className="text-gray-500 text-sm mb-6">
-                Every JB Racks model independently rated for Australian conditions. All prices in AUD including free shipping.
-              </p>
-
-              <div className="flex flex-col gap-5">
-                {jbProducts.filter((p) => p.categorySlug === "vertical-bike-racks").map((product, i) => (
-                  <ProductCard key={product.slug} product={product} rank={i + 1} />
-                ))}
-              </div>
-            </section>
-
             {/* ── Customer reviews ── */}
             <section id="reviews" className="mb-12">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">JB Racks Customer Reviews</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">What Owners Are Saying</h2>
               <p className="text-sm text-gray-500 mb-6">
-                Verified reviews from Australian JB Racks owners. Additional reviews available at{" "}
+                Verified reviews from JB Racks owners. Additional reviews at{" "}
                 <a href="https://jbracks.com.au" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                   jbracks.com.au
                 </a>
-                {" "}(178+ for the 4-bike model alone).
+                {" "}(270+ verified buyers).
               </p>
+
+              {/* ── Cialdini: wisdom-of-the-crowd strip ── */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+                {[
+                  { stat: "15,000+", label: "customers worldwide" },
+                  { stat: "270+",    label: "verified reviews" },
+                  { stat: `${avgRating}/5`, label: "average rating" },
+                  { stat: "4 yrs",   label: "warranty – longest in category" },
+                ].map(({ stat, label }) => (
+                  <div key={label} className="rounded-xl border border-gray-200 bg-white p-4 text-center">
+                    <div className="text-2xl font-black text-blue-600 leading-none mb-1">{stat}</div>
+                    <div className="text-[11px] text-gray-500 leading-tight">{label}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* ── Cialdini: pull-quote highlights ── */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                {[
+                  { quote: "We are 1,000 miles into a 3,800 mile trip and the rack is working flawlessly. Two fellow campers have already asked me about it.", author: "Todd B.", stars: 5 },
+                  { quote: "Fantastic quality. Bikes are easy to put on and take off. Was very surprised by how stable it was on the back of the car.", author: "Lachlan M.", stars: 5 },
+                  { quote: "We absolutely love the bike rack for our family of 4. So easy to load and unload. Customer service was quick and very helpful!", author: "Sara T.", stars: 5 },
+                ].map(({ quote, author, stars }) => (
+                  <div key={author} className="rounded-xl bg-blue-50 border border-blue-100 p-5 flex flex-col gap-3">
+                    <div className="flex gap-0.5">
+                      {[1,2,3,4,5].map((s) => (
+                        <Star key={s} className={`h-3.5 w-3.5 ${s <= stars ? "text-amber-400 fill-amber-400" : "text-gray-200"}`} />
+                      ))}
+                    </div>
+                    <p className="text-sm text-gray-700 leading-relaxed italic flex-1">&ldquo;{quote}&rdquo;</p>
+                    <p className="text-xs font-semibold text-gray-500">— {author}, Verified Buyer</p>
+                  </div>
+                ))}
+              </div>
 
               {/* Aggregate bar chart */}
               <div className="rounded-2xl border border-gray-200 bg-gray-50 p-6 mb-6 flex flex-col sm:flex-row gap-6">
@@ -406,6 +426,19 @@ export default function JBRacksReviewsPage() {
     />
   </div>
 </section>
+
+            {/* ── Product range ── */}
+            <section id="range" className="mb-12">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">The JB Racks Range</h2>
+              <p className="text-gray-500 text-sm mb-6">
+                Every JB Racks model independently rated for Australian conditions. All prices in AUD including free shipping.
+              </p>
+              <div className="flex flex-col gap-5">
+                {jbProducts.filter((p) => p.categorySlug === "vertical-bike-racks").map((product, i) => (
+                  <ProductCard key={product.slug} product={product} rank={i + 1} />
+                ))}
+              </div>
+            </section>
 
             {/* ── JB Racks vs Thule ── */}
             <section id="vs-thule" className="mb-12">
