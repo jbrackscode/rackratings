@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "**.cloudinary.com" },
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "jbracks.com.au" },
+      { protocol: "https", hostname: "media-dynamic.okendo.io" },
     ],
   },
   async headers() {
