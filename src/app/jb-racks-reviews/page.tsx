@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { CheckCircle, XCircle, Star, ExternalLink, ChevronRight } from "lucide-react"
 import { StarRating } from "@/components/ui/star-rating"
 import { Badge } from "@/components/ui/badge"
@@ -337,7 +338,7 @@ export default function JBRacksReviewsPage() {
                   </div>
                   <div className="flex flex-col gap-4">
                     {siteReviews.map((review) => (
-                      <ReviewCard key={review.id} review={review} productName={productsBySlug[review.productSlug]?.name} source="jbracks.com.au" />
+                      <ReviewCard key={review.id} review={review} productName={productsBySlug[review.productSlug]?.name} productImage={productsBySlug[review.productSlug]?.image} source="jbracks.com.au" />
                     ))}
                   </div>
                 </div>
@@ -348,7 +349,7 @@ export default function JBRacksReviewsPage() {
                 <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">RackRatings Community Reviews</p>
                 <div className="flex flex-col gap-4">
                   {editorialReviews.map((review) => (
-                    <ReviewCard key={review.id} review={review} productName={productsBySlug[review.productSlug]?.name} />
+                    <ReviewCard key={review.id} review={review} productName={productsBySlug[review.productSlug]?.name} productImage={productsBySlug[review.productSlug]?.image} />
                   ))}
                 </div>
               </div>
@@ -592,19 +593,27 @@ function ProductCard({ product, rank }: { product: Product; rank: number }) {
 function ReviewCard({
   review,
   productName,
+  productImage,
   source,
 }: {
   review: { id: string; author: string; rating: number; title?: string; body: string; date?: string; verified?: boolean }
   productName?: string
+  productImage?: string
   source?: string
 }) {
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-5">
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center text-blue-700 font-bold text-sm flex-shrink-0">
-            {review.author.charAt(0)}
-          </div>
+          {productImage ? (
+            <div className="w-12 h-12 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0 border border-gray-200">
+              <Image src={productImage} alt={productName ?? "JB Racks"} width={48} height={48} className="object-cover w-full h-full" />
+            </div>
+          ) : (
+            <div className="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center text-blue-700 font-bold text-sm flex-shrink-0">
+              {review.author.charAt(0)}
+            </div>
+          )}
           <div>
             <div className="font-semibold text-gray-900 text-sm">{review.author}</div>
             {productName && (
