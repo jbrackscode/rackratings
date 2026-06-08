@@ -596,18 +596,26 @@ function ReviewCard({
   productImage,
   source,
 }: {
-  review: { id: string; author: string; rating: number; title?: string; body: string; date?: string; verified?: boolean }
+  review: { id: string; author: string; rating: number; title?: string; body: string; date?: string; verified?: boolean; image?: string }
   productName?: string
   productImage?: string
   source?: string
 }) {
+  const thumbSrc = review.image ?? productImage
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-5">
+      {/* Review photo (customer upload) */}
+      {review.image && (
+        <div className="mb-4 rounded-lg overflow-hidden bg-gray-100 border border-gray-200 w-full">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={review.image} alt={`Review photo by ${review.author}`} className="w-full max-h-64 object-cover" loading="lazy" />
+        </div>
+      )}
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="flex items-center gap-3">
-          {productImage ? (
-            <div className="w-12 h-12 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0 border border-gray-200">
-              <Image src={productImage} alt={productName ?? "JB Racks"} width={48} height={48} className="object-cover w-full h-full" />
+          {thumbSrc ? (
+            <div className="w-10 h-10 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0 border border-gray-200">
+              <Image src={thumbSrc} alt={productName ?? "JB Racks"} width={40} height={40} className="object-cover w-full h-full" />
             </div>
           ) : (
             <div className="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center text-blue-700 font-bold text-sm flex-shrink-0">
