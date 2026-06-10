@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next"
 import { categories, products, advertorials, blogPosts, brands } from "@/lib/data"
 
-const BASE_URL = "https://rackratings.com.au"
+const BASE_URL = "https://www.rackratings.com.au"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
