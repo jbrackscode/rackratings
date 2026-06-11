@@ -13,6 +13,8 @@ import type { Product } from "@/types"
 const YEAR = new Date().getFullYear()
 const PATH = "/jb-racks-reviews"
 
+export const revalidate = 86400
+
 export const metadata: Metadata = buildMetadata({
   title: `JB Racks Reviews ${YEAR} – 4.9/5 Stars from Australian Owners`,
   description: `178+ verified JB Racks reviews from Australian customers. Independent expert rating: 4.9/5. Full verdict on the 4, 5 & 6-bike vertical rack range. Prices from AU$649 with 4-year warranty.`,
@@ -72,7 +74,7 @@ async function fetchAllOkendoReviews(): Promise<OkendoReview[]> {
     `https://api.okendo.io/v1/stores/${STORE}/products/${PRODUCT}/reviews?limit=50&orderBy=has_media%20desc,rating%20desc`
   while (url) {
     try {
-      const res = await fetch(url, { next: { revalidate: 86400 } })
+      const res = await fetch(url, { cache: "force-cache" })
       if (!res.ok) break
       const data: { reviews?: OkendoReview[]; nextUrl?: string } = await res.json()
       all.push(...(data.reviews ?? []))
