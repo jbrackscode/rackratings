@@ -56,7 +56,7 @@ const faqs = [
 
 export default function JBRacksReviewsPage() {
   const jbProducts = getProductsByBrand("JB Racks")
-  const jbReviews = getReviewsByBrand("JB Racks")
+  const jbReviews = getReviewsByBrand("JB Racks").sort((a, b) => (b.image ? 1 : 0) - (a.image ? 1 : 0))
   const flagship = jbProducts.find((p) => p.slug === "jb-racks-4-vertical-bike-rack") ?? jbProducts[0]
   const productsBySlug = Object.fromEntries(jbProducts.map((p) => [p.slug, p]))
 
