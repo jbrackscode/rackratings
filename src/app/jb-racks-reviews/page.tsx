@@ -4,7 +4,7 @@ import { CheckCircle, XCircle, Star, ExternalLink, ChevronRight } from "lucide-r
 import { StarRating } from "@/components/ui/star-rating"
 import { Badge } from "@/components/ui/badge"
 import { TrackedCta } from "@/components/tracking/tracked-cta"
-import { getProductsByBrand } from "@/lib/data"
+import { getProductsByBrand, getReviewsByBrand } from "@/lib/data"
 import { buildMetadata, breadcrumbJsonLd, faqJsonLd, articleJsonLd } from "@/lib/seo"
 import { goUrl } from "@/lib/affiliate"
 import type { Metadata } from "next"
@@ -12,8 +12,6 @@ import type { Product } from "@/types"
 
 const YEAR = new Date().getFullYear()
 const PATH = "/jb-racks-reviews"
-
-export const revalidate = 86400
 
 export const metadata: Metadata = buildMetadata({
   title: `JB Racks Reviews ${YEAR} – 4.9/5 Stars from Australian Owners`,
@@ -56,53 +54,19 @@ const faqs = [
   },
 ]
 
-interface OkendoReview {
-  reviewId: string
-  title?: string
-  body: string
-  rating: number
-  dateCreated: string
-  reviewer: { displayName: string; isVerified: boolean }
-  media: Array<{ largeUrl: string; alt?: string }>
-}
-
-async function fetchAllOkendoReviews(): Promise<OkendoReview[]> {
-  const STORE = "442d4e28-7f23-47f9-ae79-9c376bb2d2c3"
-  const PRODUCT = "shopify-10011049394495"
-  const apiKey = process.env.OKENDO_API_KEY
-  const headers: Record<string, string> = { "Content-Type": "application/json" }
-  if (apiKey) headers["Authorization"] = `Bearer ${apiKey}`
-
-  const all: OkendoReview[] = []
-  let url: string | null =
-    `https://api.okendo.io/v1/stores/${STORE}/products/${PRODUCT}/reviews?limit=50&orderBy=has_media%20desc,rating%20desc`
-  while (url) {
-    try {
-      const res = await fetch(url, { cache: "force-cache", headers })
-      if (!res.ok) break
-      const data: { reviews?: OkendoReview[]; nextUrl?: string } = await res.json()
-      all.push(...(data.reviews ?? []))
-      url = data.nextUrl ?? null
-    } catch {
-      break
-    }
-  }
-  return all
-}
-
-export default async function JBRacksReviewsPage() {
+export default function JBRacksReviewsPage() {
   const jbProducts = getProductsByBrand("JB Racks")
+  const jbReviews = getReviewsByBrand("JB Racks")
   const flagship = jbProducts.find((p) => p.slug === "jb-racks-4-vertical-bike-rack") ?? jbProducts[0]
+  const productsBySlug = Object.fromEntries(jbProducts.map((p) => [p.slug, p]))
 
-  const okendoReviews = await fetchAllOkendoReviews()
-
-  const avgRating = okendoReviews.length
-    ? Math.round((okendoReviews.reduce((s, r) => s + r.rating, 0) / okendoReviews.length) * 10) / 10
+  const avgRating = jbReviews.length
+    ? Math.round((jbReviews.reduce((s, r) => s + r.rating, 0) / jbReviews.length) * 10) / 10
     : 4.9
 
   const distribution = [5, 4, 3, 2, 1].map((star) => ({
     star,
-    count: okendoReviews.filter((r) => r.rating === star).length,
+    count: jbReviews.filter((r) => r.rating === star).length,
   }))
 
   const breadcrumbLd = breadcrumbJsonLd([
@@ -114,7 +78,7 @@ export default async function JBRacksReviewsPage() {
 
   const articleLd = articleJsonLd({
     headline: `JB Racks Reviews ${YEAR} – Are Australia's Most Popular Vertical Bike Racks Worth It?`,
-    description: `Independent review of the full JB Racks range. ${okendoReviews.length} verified customer reviews, expert assessment, specs, and head-to-head comparisons for Australian buyers.`,
+    description: `Independent review of the full JB Racks range. ${jbReviews.length} verified customer reviews, expert assessment, specs, and head-to-head comparisons for Australian buyers.`,
     path: PATH,
     datePublished: "2025-01-01",
     dateModified: "2026-05-01",
@@ -130,17 +94,17 @@ export default async function JBRacksReviewsPage() {
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: avgRating,
-      reviewCount: okendoReviews.length,
+      reviewCount: jbReviews.length,
       bestRating: 5,
       worstRating: 1,
     },
-    review: okendoReviews.slice(0, 10).map((r) => ({
+    review: jbReviews.slice(0, 10).map((r) => ({
       "@type": "Review",
-      author: { "@type": "Person", name: r.reviewer.displayName },
+      author: { "@type": "Person", name: r.author },
       reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5, worstRating: 1 },
       reviewBody: r.body,
       name: r.title ?? "",
-      datePublished: r.dateCreated.split("T")[0],
+      datePublished: r.date,
     })),
     offers: {
       "@type": "Offer",
@@ -211,7 +175,7 @@ export default async function JBRacksReviewsPage() {
                         <Star key={s} className={`h-5 w-5 ${s <= Math.round(avgRating) ? "text-amber-400 fill-amber-400" : "text-gray-600"}`} />
                       ))}
                     </div>
-                    <div className="text-sm text-blue-300 mt-0.5">{okendoReviews.length} verified reviews</div>
+                    <div className="text-sm text-blue-300 mt-0.5">{jbReviews.length} verified reviews</div>
                   </div>
                 </div>
                 <div className="h-10 w-px bg-blue-800" />
@@ -333,14 +297,14 @@ export default async function JBRacksReviewsPage() {
                 <a href="https://jbracks.com.au/products/4-e-bike-rack" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                   jbracks.com.au
                 </a>
-                {" "}({okendoReviews.length} verified buyers).
+                {" "}({jbReviews.length} verified buyers).
               </p>
 
               {/* ── Cialdini: wisdom-of-the-crowd strip ── */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
                 {[
                   { stat: "15,000+", label: "customers worldwide" },
-                  { stat: `${okendoReviews.length}+`, label: "verified reviews" },
+                  { stat: `${jbReviews.length}+`, label: "verified reviews" },
                   { stat: `${avgRating}/5`, label: "average rating" },
                   { stat: "4 yrs",   label: "warranty" },
                 ].map(({ stat, label }) => (
@@ -379,7 +343,7 @@ export default async function JBRacksReviewsPage() {
                       <Star key={s} className="h-5 w-5 text-amber-400 fill-amber-400" />
                     ))}
                   </div>
-                  <div className="text-sm text-gray-500 mt-1">{okendoReviews.length} reviews</div>
+                  <div className="text-sm text-gray-500 mt-1">{jbReviews.length} reviews</div>
                 </div>
                 <div className="flex-1 flex flex-col gap-1.5 justify-center">
                   {distribution.map(({ star, count }) => (
@@ -389,7 +353,7 @@ export default async function JBRacksReviewsPage() {
                       <div className="flex-1 h-2 rounded-full bg-gray-200 overflow-hidden">
                         <div
                           className="h-full rounded-full bg-amber-400"
-                          style={{ width: `${okendoReviews.length ? (count / okendoReviews.length) * 100 : 0}%` }}
+                          style={{ width: `${jbReviews.length ? (count / jbReviews.length) * 100 : 0}%` }}
                         />
                       </div>
                       <span className="w-4 text-xs text-gray-400">{count}</span>
@@ -407,19 +371,11 @@ export default async function JBRacksReviewsPage() {
                   </a>
                 </div>
                 <div className="flex flex-col gap-4">
-                  {okendoReviews.map((review) => (
+                  {jbReviews.map((review) => (
                     <ReviewCard
-                      key={review.reviewId}
-                      review={{
-                        id: review.reviewId,
-                        author: review.reviewer.displayName,
-                        rating: review.rating,
-                        title: review.title,
-                        body: review.body,
-                        date: review.dateCreated,
-                        verified: review.reviewer.isVerified,
-                        image: review.media?.[0]?.largeUrl,
-                      }}
+                      key={review.id}
+                      review={review}
+                      productImage={productsBySlug[review.productSlug]?.image}
                       source="jbracks.com.au"
                     />
                   ))}
@@ -678,9 +634,11 @@ function ProductCard({ product, rank }: { product: Product; rank: number }) {
 
 function ReviewCard({
   review,
+  productImage,
   source,
 }: {
   review: { id: string; author: string; rating: number; title?: string; body: string; date?: string; verified?: boolean; image?: string }
+  productImage?: string
   source?: string
 }) {
   return (
@@ -699,9 +657,15 @@ function ReviewCard({
       )}
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center text-blue-700 font-bold text-sm flex-shrink-0">
-            {review.author.charAt(0).toUpperCase()}
-          </div>
+          {productImage ? (
+            <div className="w-10 h-10 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0 border border-gray-200">
+              <Image src={productImage} alt={review.author} width={40} height={40} className="object-cover w-full h-full" />
+            </div>
+          ) : (
+            <div className="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center text-blue-700 font-bold text-sm flex-shrink-0">
+              {review.author.charAt(0).toUpperCase()}
+            </div>
+          )}
           <div>
             <div className="font-semibold text-gray-900 text-sm">{review.author}</div>
           </div>
