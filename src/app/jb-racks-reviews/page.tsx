@@ -4,13 +4,12 @@ import { CheckCircle, XCircle, Star, ExternalLink, ChevronRight } from "lucide-r
 import { StarRating } from "@/components/ui/star-rating"
 import { Badge } from "@/components/ui/badge"
 import { TrackedCta } from "@/components/tracking/tracked-cta"
-import { products, reviews as allReviews, getBrandBySlug, getProductsByBrand, getReviewsByBrand } from "@/lib/data"
+import { getProductsByBrand } from "@/lib/data"
 import { buildMetadata, breadcrumbJsonLd, faqJsonLd, articleJsonLd } from "@/lib/seo"
 import { goUrl } from "@/lib/affiliate"
 import type { Metadata } from "next"
 import type { Product } from "@/types"
 
-const SLUG = "jb-racks"
 const YEAR = new Date().getFullYear()
 const PATH = "/jb-racks-reviews"
 
@@ -55,26 +54,50 @@ const faqs = [
   },
 ]
 
-export default function JBRacksReviewsPage() {
-  const brand = getBrandBySlug(SLUG)
+interface OkendoReview {
+  reviewId: string
+  title?: string
+  body: string
+  rating: number
+  dateCreated: string
+  reviewer: { displayName: string; isVerified: boolean }
+  media: Array<{ largeUrl: string; alt?: string }>
+}
+
+async function fetchAllOkendoReviews(): Promise<OkendoReview[]> {
+  const STORE = "442d4e28-7f23-47f9-ae79-9c376bb2d2c3"
+  const PRODUCT = "shopify-10011049394495"
+  const all: OkendoReview[] = []
+  let url: string | null =
+    `https://api.okendo.io/v1/stores/${STORE}/products/${PRODUCT}/reviews?limit=50&orderBy=has_media%20desc,rating%20desc`
+  while (url) {
+    try {
+      const res = await fetch(url, { next: { revalidate: 86400 } })
+      if (!res.ok) break
+      const data: { reviews?: OkendoReview[]; nextUrl?: string } = await res.json()
+      all.push(...(data.reviews ?? []))
+      url = data.nextUrl ?? null
+    } catch {
+      break
+    }
+  }
+  return all
+}
+
+export default async function JBRacksReviewsPage() {
   const jbProducts = getProductsByBrand("JB Racks")
-  const jbReviews = getReviewsByBrand("JB Racks")
   const flagship = jbProducts.find((p) => p.slug === "jb-racks-4-vertical-bike-rack") ?? jbProducts[0]
 
-  const avgRating = jbReviews.length
-    ? Math.round((jbReviews.reduce((s, r) => s + r.rating, 0) / jbReviews.length) * 10) / 10
+  const okendoReviews = await fetchAllOkendoReviews()
+
+  const avgRating = okendoReviews.length
+    ? Math.round((okendoReviews.reduce((s, r) => s + r.rating, 0) / okendoReviews.length) * 10) / 10
     : 4.9
 
   const distribution = [5, 4, 3, 2, 1].map((star) => ({
     star,
-    count: jbReviews.filter((r) => r.rating === star).length,
+    count: okendoReviews.filter((r) => r.rating === star).length,
   }))
-
-  const productsBySlug = Object.fromEntries(jbProducts.map((p) => [p.slug, p]))
-
-  // Reviews sourced directly from jbracks.com.au vs editorial
-  const siteReviews = jbReviews.filter((r) => r.id.startsWith("jb-site-"))
-  const editorialReviews = jbReviews.filter((r) => !r.id.startsWith("jb-site-"))
 
   const breadcrumbLd = breadcrumbJsonLd([
     { name: "Home", href: "/" },
@@ -85,7 +108,7 @@ export default function JBRacksReviewsPage() {
 
   const articleLd = articleJsonLd({
     headline: `JB Racks Reviews ${YEAR} – Are Australia's Most Popular Vertical Bike Racks Worth It?`,
-    description: `Independent review of the full JB Racks range. ${jbReviews.length} verified customer reviews, expert assessment, specs, and head-to-head comparisons for Australian buyers.`,
+    description: `Independent review of the full JB Racks range. ${okendoReviews.length} verified customer reviews, expert assessment, specs, and head-to-head comparisons for Australian buyers.`,
     path: PATH,
     datePublished: "2025-01-01",
     dateModified: "2026-05-01",
@@ -97,21 +120,21 @@ export default function JBRacksReviewsPage() {
     name: flagship?.name ?? "JB Racks 4 Vertical Bike Rack",
     brand: { "@type": "Brand", name: "JB Racks" },
     description: flagship?.description,
-    url: `https://rackratings.com.au/products/vertical-bike-racks/jb-racks-4-vertical-bike-rack`,
+    url: `https://www.rackratings.com.au/products/vertical-bike-racks/jb-racks-4-vertical-bike-rack`,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: avgRating,
-      reviewCount: jbReviews.length,
+      reviewCount: okendoReviews.length,
       bestRating: 5,
       worstRating: 1,
     },
-    review: jbReviews.map((r) => ({
+    review: okendoReviews.slice(0, 10).map((r) => ({
       "@type": "Review",
-      author: { "@type": "Person", name: r.author },
+      author: { "@type": "Person", name: r.reviewer.displayName },
       reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5, worstRating: 1 },
       reviewBody: r.body,
-      name: r.title,
-      datePublished: r.date,
+      name: r.title ?? "",
+      datePublished: r.dateCreated.split("T")[0],
     })),
     offers: {
       "@type": "Offer",
@@ -182,7 +205,7 @@ export default function JBRacksReviewsPage() {
                         <Star key={s} className={`h-5 w-5 ${s <= Math.round(avgRating) ? "text-amber-400 fill-amber-400" : "text-gray-600"}`} />
                       ))}
                     </div>
-                    <div className="text-sm text-blue-300 mt-0.5">{jbReviews.length} verified reviews</div>
+                    <div className="text-sm text-blue-300 mt-0.5">{okendoReviews.length} verified reviews</div>
                   </div>
                 </div>
                 <div className="h-10 w-px bg-blue-800" />
@@ -200,7 +223,7 @@ export default function JBRacksReviewsPage() {
               <div className="text-5xl font-black text-white mb-1">{avgRating}<span className="text-2xl text-blue-400">/5</span></div>
               <div className="text-sm text-green-300 font-semibold mb-4">Highly Recommended</div>
               <div className="space-y-1.5 mb-5">
-                {["Best value per bike in Australia", "E-bike ready (30 kg per holder)", "Longest warranty in category", "Australian-owned & supported"].map((pro) => (
+                {["Best value per bike in Australia", "E-bike ready (30 kg per holder)", "4-yr warranty", "Australian-owned & supported"].map((pro) => (
                   <div key={pro} className="flex items-start gap-2 text-sm text-blue-100">
                     <CheckCircle className="h-4 w-4 text-green-400 flex-shrink-0 mt-0.5" />
                     {pro}
@@ -300,20 +323,20 @@ export default function JBRacksReviewsPage() {
             <section id="reviews" className="mb-12">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">What Owners Are Saying</h2>
               <p className="text-sm text-gray-500 mb-6">
-                Verified reviews from JB Racks owners. Additional reviews at{" "}
-                <a href="https://jbracks.com.au" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                Verified reviews from JB Racks owners sourced directly from{" "}
+                <a href="https://jbracks.com.au/products/4-e-bike-rack" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                   jbracks.com.au
                 </a>
-                {" "}(270+ verified buyers).
+                {" "}({okendoReviews.length} verified buyers).
               </p>
 
               {/* ── Cialdini: wisdom-of-the-crowd strip ── */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
                 {[
                   { stat: "15,000+", label: "customers worldwide" },
-                  { stat: "270+",    label: "verified reviews" },
+                  { stat: `${okendoReviews.length}+`, label: "verified reviews" },
                   { stat: `${avgRating}/5`, label: "average rating" },
-                  { stat: "4 yrs",   label: "warranty – longest in category" },
+                  { stat: "4 yrs",   label: "warranty" },
                 ].map(({ stat, label }) => (
                   <div key={label} className="rounded-xl border border-gray-200 bg-white p-4 text-center">
                     <div className="text-2xl font-black text-blue-600 leading-none mb-1">{stat}</div>
@@ -350,7 +373,7 @@ export default function JBRacksReviewsPage() {
                       <Star key={s} className="h-5 w-5 text-amber-400 fill-amber-400" />
                     ))}
                   </div>
-                  <div className="text-sm text-gray-500 mt-1">{jbReviews.length} reviews</div>
+                  <div className="text-sm text-gray-500 mt-1">{okendoReviews.length} reviews</div>
                 </div>
                 <div className="flex-1 flex flex-col gap-1.5 justify-center">
                   {distribution.map(({ star, count }) => (
@@ -360,7 +383,7 @@ export default function JBRacksReviewsPage() {
                       <div className="flex-1 h-2 rounded-full bg-gray-200 overflow-hidden">
                         <div
                           className="h-full rounded-full bg-amber-400"
-                          style={{ width: `${jbReviews.length ? (count / jbReviews.length) * 100 : 0}%` }}
+                          style={{ width: `${okendoReviews.length ? (count / okendoReviews.length) * 100 : 0}%` }}
                         />
                       </div>
                       <span className="w-4 text-xs text-gray-400">{count}</span>
@@ -369,32 +392,34 @@ export default function JBRacksReviewsPage() {
                 </div>
               </div>
 
-              {/* Site-sourced reviews first */}
-              {siteReviews.length > 0 && (
-                <div className="mb-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-xs font-bold uppercase tracking-widest text-gray-400">Sourced from jbracks.com.au</span>
-                    <a href="https://jbracks.com.au/products/4-e-bike-rack" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700">
-                      <ExternalLink className="h-3.5 w-3.5" />
-                    </a>
-                  </div>
-                  <div className="flex flex-col gap-4">
-                    {siteReviews.map((review) => (
-                      <ReviewCard key={review.id} review={review} productName={productsBySlug[review.productSlug]?.name} productImage={productsBySlug[review.productSlug]?.image} source="jbracks.com.au" />
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Editorial/community reviews */}
+              {/* All Okendo reviews */}
               <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">RackRatings Community Reviews</p>
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-xs font-bold uppercase tracking-widest text-gray-400">Sourced from jbracks.com.au</span>
+                  <a href="https://jbracks.com.au/products/4-e-bike-rack" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700">
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                </div>
                 <div className="flex flex-col gap-4">
-                  {editorialReviews.map((review) => (
-                    <ReviewCard key={review.id} review={review} productName={productsBySlug[review.productSlug]?.name} productImage={productsBySlug[review.productSlug]?.image} />
+                  {okendoReviews.map((review) => (
+                    <ReviewCard
+                      key={review.reviewId}
+                      review={{
+                        id: review.reviewId,
+                        author: review.reviewer.displayName,
+                        rating: review.rating,
+                        title: review.title,
+                        body: review.body,
+                        date: review.dateCreated,
+                        verified: review.reviewer.isVerified,
+                        image: review.media?.[0]?.largeUrl,
+                      }}
+                      source="jbracks.com.au"
+                    />
                   ))}
                 </div>
               </div>
+
             </section>
 
 {/* ── JB Loading Demo ── */}
@@ -647,40 +672,32 @@ function ProductCard({ product, rank }: { product: Product; rank: number }) {
 
 function ReviewCard({
   review,
-  productName,
-  productImage,
   source,
 }: {
   review: { id: string; author: string; rating: number; title?: string; body: string; date?: string; verified?: boolean; image?: string }
-  productName?: string
-  productImage?: string
   source?: string
 }) {
-  const thumbSrc = review.image ?? productImage
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-5">
-      {/* Review photo (customer upload) */}
+      {/* Review photo */}
       {review.image && (
         <div className="mb-4 flex justify-center">
-          <Image src={review.image} alt={`Review photo by ${review.author}`} width={320} height={213} className="rounded-lg object-cover max-w-[320px] w-full" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={review.image}
+            alt={`Review photo by ${review.author}`}
+            className="rounded-lg object-cover max-w-[320px] w-full"
+            loading="lazy"
+          />
         </div>
       )}
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="flex items-center gap-3">
-          {thumbSrc ? (
-            <div className="w-10 h-10 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0 border border-gray-200">
-              <Image src={thumbSrc} alt={productName ?? "JB Racks"} width={40} height={40} className="object-cover w-full h-full" />
-            </div>
-          ) : (
-            <div className="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center text-blue-700 font-bold text-sm flex-shrink-0">
-              {review.author.charAt(0)}
-            </div>
-          )}
+          <div className="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center text-blue-700 font-bold text-sm flex-shrink-0">
+            {review.author.charAt(0).toUpperCase()}
+          </div>
           <div>
             <div className="font-semibold text-gray-900 text-sm">{review.author}</div>
-            {productName && (
-              <div className="text-xs text-gray-400 mt-0.5">{productName}</div>
-            )}
           </div>
         </div>
         <div className="flex flex-col items-end gap-1 flex-shrink-0">
