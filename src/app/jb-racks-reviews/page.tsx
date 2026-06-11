@@ -69,12 +69,16 @@ interface OkendoReview {
 async function fetchAllOkendoReviews(): Promise<OkendoReview[]> {
   const STORE = "442d4e28-7f23-47f9-ae79-9c376bb2d2c3"
   const PRODUCT = "shopify-10011049394495"
+  const apiKey = process.env.OKENDO_API_KEY
+  const headers: Record<string, string> = { "Content-Type": "application/json" }
+  if (apiKey) headers["Authorization"] = `Bearer ${apiKey}`
+
   const all: OkendoReview[] = []
   let url: string | null =
     `https://api.okendo.io/v1/stores/${STORE}/products/${PRODUCT}/reviews?limit=50&orderBy=has_media%20desc,rating%20desc`
   while (url) {
     try {
-      const res = await fetch(url, { cache: "force-cache" })
+      const res = await fetch(url, { cache: "force-cache", headers })
       if (!res.ok) break
       const data: { reviews?: OkendoReview[]; nextUrl?: string } = await res.json()
       all.push(...(data.reviews ?? []))
