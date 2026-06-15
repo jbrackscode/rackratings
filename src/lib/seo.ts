@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-const SITE_URL = "https://rackratings.com.au"
+const SITE_URL = "https://www.rackratings.com.au"
 const SITE_NAME = "RackRatings"
 const DEFAULT_DESCRIPTION =
   "Australia's trusted ratings and comparison site for car racks, bike racks, and outdoor racks. Expert reviews, specs, and prices in AUD."

@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/_next/", "/admin/"],
       },
     ],
-    sitemap: "https://rackratings.com.au/sitemap.xml",
-    host: "https://rackratings.com.au",
+    sitemap: "https://www.rackratings.com.au/sitemap.xml",
+    host: "https://www.rackratings.com.au",
   }
 }
